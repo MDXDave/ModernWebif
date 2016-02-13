@@ -11,7 +11,11 @@ Known Issues
 
 Screenshots
 -------
-Coming soon...
+TV bouquets
+![Screen 1](screens/modernwebif_screen_1.png)
+
+Timerlist
+![Timerlist](screens/modernwebif_screen_2.png)
 
 Depends
 -------
