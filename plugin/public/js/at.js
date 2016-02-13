@@ -238,15 +238,10 @@ function InitPage() {
 	initValues ();
 	checkValues();
 	getData();
-	$("#actions").buttonset();
 	$("#atbutton0").click(function () { addAT(); });
-	$("#atbutton0" ).button({icons: { primary: "ui-icon-plus"}});
 	$("#atbutton1").click(function () { delAT(); });
-	$("#atbutton1" ).button({icons: { primary: "ui-icon-minus"}});
 	$("#atbutton2").click(function () { reloadAT(); });
-	$("#atbutton2").button({icons: { primary: "ui-icon-arrowrefresh-1-w"}});
 	$("#atbutton3").click(function () { saveAT(); });
-	$("#atbutton3").button({icons: { primary: "ui-icon-disk"}});
 	$("#atbutton4").click(function () { parseAT(); });
 	$("#atbutton5").click(function () { simulateAT(); });
 	$("#atbutton6").click(function () { listTimers(); });
