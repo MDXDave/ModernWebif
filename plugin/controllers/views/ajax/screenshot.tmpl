@@ -1,16 +1,12 @@
 #from Plugins.Extensions.OpenWebif.local import tstrings
 <div id="content_main" style="min-height: 533px;">
 	<div id="info">
-		<h3>$tstrings['screenshot']</h3>
-
 		<div id="toolbar-header">
-			<span id="toolbar">
-				<span id="screenshotbutton">
-					<input type="radio" id="screenshotbutton0" name="screenshotbutton" onclick="grabScreenshot('all'); return false" checked="checked" /><label for="screenshotbutton0">$tstrings['screenshot'] ($tstrings['all'])</label>
-					<input type="radio" id="screenshotbutton1" name="screenshotbutton" onclick="grabScreenshot('video'); return false" /><label for="screenshotbutton1">$tstrings['screenshot'] ($tstrings['video'])</label>
-					<input type="radio" id="screenshotbutton2" name="screenshotbutton" onclick="grabScreenshot('osd'); return false" /><label for="screenshotbutton2">$tstrings['screenshot'] ($tstrings['osd'])</label>
-				</span>
-			</span>
+				<ul id="screenshotbutton">
+					<li id="screenshotbutton0" class="active">$tstrings['screenshot'] ($tstrings['all'])</li>
+					<li id="screenshotbutton1">$tstrings['screenshot'] ($tstrings['video'])</li>
+					<li id="screenshotbutton2">$tstrings['screenshot'] ($tstrings['osd'])</li>
+				</ul>
 		</div>
 	
 
@@ -32,7 +28,7 @@
 			</span>
 		</div>
 		<div id="screenshotspinnerl">
-			<img id="screenshotspinner" src="/images/spinner.gif" width="64" height="64" border="0" alt="$tstrings['loading'] ..." style="display: none;">
+			<i id="screenshotspinner" class="fa fa-spin fa-circle-o-notch"></i>
 		</div>
 	</div>
 </div>

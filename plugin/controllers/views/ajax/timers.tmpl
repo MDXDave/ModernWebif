@@ -4,41 +4,31 @@
 <div id="content_main" style="min-height: 500px;">
 	<div id="tvcontentmain">
 		<div id="toolbar-header">
-			<span id="toolbar">
-				<span id="timerbuttons">
-					<button id="timerbutton0" onclick="addTimer(); return false">$tstrings['add_timer']</button>
-					<button id="timerbutton1" onclick="cleanupTimer(); return false">$tstrings['cleanup_timer']</button>
-					<button id="timerbutton2" onclick="lastcontenturl='';load_maincontent('ajax/timers'); return false;">$tstrings['refresh_timer']</button>
-				</span>
-			</span>
+				<ul id="timerbuttons">
+					<li id="timerbutton0" onclick="addTimer(); return false" class="active">$tstrings['add_timer']</li>
+					<li id="timerbutton1" onclick="cleanupTimer(); return false">$tstrings['cleanup_timer']</li>
+					<li id="timerbutton2" onclick="lastcontenturl='';load_maincontent('ajax/timers'); return false;">$tstrings['refresh_timer']</li>
+				</ul>
 		</div>
 
 		<div id="timers">
 		#for $timer in $timers
 			<div class="tm_row" id="$timer.begin-$timer.end">
 				<div class="tm_text">
-					<div class="tm_buttons">
-						<div>
-						#set $sref=quote($timer.serviceref, safe=' ~@#$&()*!+=:;,.?/\'')
-						#set $tname=quote($timer.name)
-						<a href='#' onClick="editTimer('$sref', '$timer.begin', '$timer.end');" title="$tstrings['edit_timer']"><div class="ow_i ow_i_edit"></div></a>
-						<a href='#' onClick="deleteTimer('$sref', '$timer.begin', '$timer.end', '$tname');" title="$tstrings['delete_timer']"><div class="ow_i ow_i_delete"></div></a>
-						<a href='#' onClick="toggleTimerStatus('$sref', '$timer.begin', '$timer.end');" 
-						#if $timer.disabled
-						title="$tstrings['enable_timer']"><div id="img-$timer.begin-$timer.end" class="ow_i ow_i_disabled">
-						#else
-						title="$tstrings['disable_timer']"><div id="img-$timer.begin-$timer.end" class="ow_i ow_i_enabled">
-						#end if
-						</div></a>
-						</div>
-					</div>
 					<div>
-						<div style="color: #176093; font-weight: bold;">
-							$timer.name
+						<div class="title">
+              #if $timer.state == 0
+								<i class="fa fa-pause"></i>
+							#elif $timer.state == 2
+								<i class="fa fa-circle blink"></i>
+							#elif $timer.state == 3
+								<i class="fa fa-check"></i>
+							#end if
+							 &nbsp; $timer.name
 						</div>
 						$timer.realbegin - $timer.realend
 						#if $timer.repeated != 0
-							<div>
+							<div class="datetime">
 								$tstrings['every_timer']
 							#set $flags=$timer.repeated
 							#set $timerDays=[]
@@ -51,25 +41,29 @@
 							#echo ', '.join($timerDays)
 							</div>
 						#end if
-						<div style="font-weight: bold;">
+						<div class="channel">
 							$timer.servicename
 						</div>
 					</div>
 					<div>
 						$timer.description
 					</div>
-					<div>
-						<span style="color: #7F8181; font-weight: bold;">
-							#if $timer.state == 0
-								$tstrings['waiting']
-							#elif $timer.state == 2
-								$tstrings['running']
-							#elif $timer.state == 3
-								$tstrings['finished']
-							#end if
-						</span>
-					</div>
 				</div>
+				<div class="tm_buttons">
+						<div>
+						#set $sref=quote($timer.serviceref, safe=' ~@#$&()*!+=:;,.?/\'')
+						#set $tname=quote($timer.name)
+						<a href='#' onClick="editTimer('$sref', '$timer.begin', '$timer.end');" title="$tstrings['edit_timer']"><i class="fa fa-pencil"></i></a>
+						<a href='#' onClick="deleteTimer('$sref', '$timer.begin', '$timer.end', '$tname');" title="$tstrings['delete_timer']"><i class="fa fa-times"></i></a>
+						<a href='#' onClick="toggleTimerStatus('$sref', '$timer.begin', '$timer.end');" 
+						#if $timer.disabled
+						title="$tstrings['enable_timer']"><div id="img-$timer.begin-$timer.end" class="fa fa-check disable">
+						#else
+						title="$tstrings['disable_timer']"><div id="img-$timer.begin-$timer.end" class="fa fa-check">
+						#end if
+						</div></a>
+						</div>
+					</div>
 				<div style="clear: both;"></div>
 			</div>
 		#end for
@@ -80,7 +74,21 @@
 #raw
 var reloadTimers = true;
 $(function() {
-	$('#timerbuttons').buttonset();
+  $('#timerbutton0').click(function(){
+    $('ul#timerbuttons li').removeClass("active");
+    $(this).addClass("active");
+  });
+  
+  $('#timerbutton1').click(function(){
+    $('ul#timerbuttons li').removeClass("active");
+    $(this).addClass("active");
+  });
+  
+  $('#timerbutton2').click(function(){
+    $('ul#timerbuttons li').removeClass("active");
+    $(this).addClass("active");
+  });
+
 	if(!timeredit_initialized)
 		$('#editTimerForm').load('ajax/edittimer');
 });

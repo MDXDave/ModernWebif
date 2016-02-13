@@ -1,24 +1,24 @@
 #from Plugins.Extensions.OpenWebif.local import tstrings
 #from json import dumps
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!doctype html5>
+<html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="shortcut icon" href="images/favicon.png">
-<link rel="stylesheet" type="text/css" href="css/style.css" />
 <link type="text/css" href="css/jquery-ui-1.8.18.custom.css" rel="stylesheet" />	
+<link type="text/css" href="css/font-awesome.min.css" rel="stylesheet" />	
+<link rel="stylesheet" type="text/css" href="css/style.css" />
 <script type="text/javascript" src="js/jquery-1.6.2.min.js"></script>
 <script type="text/javascript" src="js/jquery-ui-1.8.18.custom.min.js"></script>
 <script type="text/javascript" src="js/openwebif.js"></script>
 <script type="text/javascript">initJsTranslation($dumps($tstrings))</script>
-<title>Open Webif</title>
+<title>ModernWebif</title>
 </head>
 
 <body>
 	<div id="container">
 		<div id="header">
-			<h1><a href="/">Open<span class="off">Webif</span></a></h1>
+			<h1><a href="/">Modern<span class="off">Webif</span></a></h1>
 			#if $showname
 			<h2>$tstrings['openwebif_header']<br /><span class="off">$boxname</span></h2>
 			#else
@@ -65,11 +65,11 @@
 			<div class="volslider">
 					<p style="text-align:center; padding-bottom:8px;"> 
 						<label for="amount">$tstrings['volume']:</label>
-						<input type="text" id="amount" style="border:0; color:#f6931f; font-weight:bold; width:40px;" />
+						<input type="text" id="amount" />
 					</p>
 				<div id="slider" style="width:130px;"></div>
 			</div>
-			<div style="width:100%; text-align:center; padding-top:5px; padding-bottom:10px;"><img id="volimage" src="images/volume.png" title="" border="0" width="48" height="48"></div>
+			<div style="width:100%; text-align:center; padding-top:5px; padding-bottom:10px;"><span class="volume_status"></span></div>
 			#end def
 
 			#def controlMenu

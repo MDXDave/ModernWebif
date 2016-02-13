@@ -1,18 +1,5 @@
 #filter WebSafe
 #from Plugins.Extensions.OpenWebif.local import tstrings
-<style>
-  #atlist .ui-selecting { background: #FECA40; }
-  #atlist .ui-selected { background: #F39814; color: white; }
-  #atlist { list-style-type: none; margin: 0; padding: 0; }
-  #atlist li { margin: 3px; padding: 0.4em; font-size: 1.1em; height: 16px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
-  optgroup {font-weight: bolder;}
-fieldset > label
-{
-	-webkit-margin-top-collapse: separate;
-	margin-top: 1.5em;
-	display: inline-block;
-}
-</style>
 
 <div id="content_main" style="min-height: 500px;">
 	<div id="info">
@@ -222,7 +209,6 @@ fieldset > label
 							</fieldset>
 						</form>
 						
-						<div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
 						<div id="actions">
 						<button id="atbutton0">$tstrings['at_add']</button>
 						<button id="atbutton1">$tstrings['at_del']</button>
@@ -232,7 +218,7 @@ fieldset > label
 						<button id="atbutton5">$tstrings['at_simulate']</button>
 						<button id="atbutton6">$tstrings['at_timers']</button>
 						<button id="atbutton7">$tstrings['at_settings']</button>
-						</div></div>
+						</div>
 						<div id="errorbox" class="timerlist_row" style="color: red;">
 		<div class="ui-state-error ui-corner-all" style="padding: 0 .7em;"> 
 			<p><span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span> 
