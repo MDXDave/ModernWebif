@@ -41,7 +41,7 @@ import sys
 import time
 import string
 
-OPENWEBIFVER = "OWIF 0.4.7"
+OPENWEBIFVER = "ModernWebif 0.9.0"
 
 STATICBOXINFO = None
 
