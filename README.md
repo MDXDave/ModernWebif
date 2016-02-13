@@ -5,6 +5,14 @@ Based on [OpenWebif](https://github.com/E2OpenPlugins/e2openplugin-OpenWebif).
 
 Themed by MDXDave
 
+Known Issues
+-------
+* MultiEPG/Bouqueteditor not themed yet!
+
+Screenshots
+-------
+Coming soon...
+
 Depends
 -------
 python-pprint
