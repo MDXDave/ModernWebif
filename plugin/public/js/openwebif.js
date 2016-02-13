@@ -3,6 +3,7 @@
 //* Version 1.0
 //******************************************************************************
 //* Copyright (C) 2011-2014 E2OpenPlugins
+//* Copyright (C) 2016 MDXDave
 //*
 //* V 1.0 - Initial Version
 //* V 1.1 - add movie move and rename
@@ -14,14 +15,22 @@
 //* 		 Joerg Bleyel <jbleyel # gmx.net>
 //* 		 Schimmelreiter
 //* 		 plnick
+//*      MDXDave
 //*
 //* License GPL V2
 //* https://github.com/E2OpenPlugins/e2openplugin-OpenWebif/blob/master/LICENSE.txt
 //*******************************************************************************
 
 $.fx.speeds._default = 1000;
-var loadspinner = "<div id='spinner' ><img src='../images/spinner.gif' alt='loading...' /></div>",mutestatus = 0,lastcontenturl = null,screenshotMode = 'all',MessageAnswerCounter=0,shiftbutton = false,grabTimer = 0,at2add = null;
+var loadspinner = "<div id='spinner' ><i class='fa fa-circle-o-notch fa-spin'></i></div>",mutestatus = 0,lastcontenturl = null,screenshotMode = 'all',MessageAnswerCounter=0,shiftbutton = false,grabTimer = 0,at2add = null;
 
+$(document).ready(function() {
+  if(document.location.hash.substr(1).length > 0)
+    load_maincontent(document.location.hash.substr(1));
+  else
+		load_maincontent('ajax/tv');
+	});
+	
 $(function() {
 	
 	$( "#dialog" ).dialog({
@@ -35,13 +44,13 @@ $(function() {
 		}
 	});
 	
-	$('#volimage').click(function(){
+	$('.volume_status').click(function(){
 		if (mutestatus === 0) {
 			mutestatus = 1;
-			$("#volimage").attr("src","/images/volume_mute.png");
+			$(".volume_status").addClass("mute").removeClass("half");
 		} else  {
 			mutestatus = 0;
-			$("#volimage").attr("src","/images/volume.png");
+			$(".volume_status").removeClass("mute").removeClass("half");
 		}
 		$.ajax("web/vol?set=mute");
 	});
@@ -60,10 +69,12 @@ $(function() {
 		},
 		stop: function( event, ui ) {	
 			if ( ui.value == 0) {
-				$("#volimage").attr("src","/images/volume_mute.png");
-			} else  {
-				$("#volimage").attr("src","/images/volume.png");
-			} 
+				$(".volume_status").addClass("mute").removeClass("half");
+			} else if(ui.value > 50) {
+				$(".volume_status").removeClass("mute").removeClass("half");
+			} else {
+        $(".volume_status").removeClass("mute").addClass("half");
+			}
 			var jqxhr = $.ajax( "web/vol?set=set" + ui.value );
 			return false;
 		}
@@ -356,6 +367,7 @@ function load_maincontent(url) {
 	if (lastcontenturl != url) {
 		$("#content_container").load(url);
 		lastcontenturl = url;
+		this.document.location.hash = "#"+url;
 	}
 	return false;
 }
@@ -494,9 +506,8 @@ function toggleTimerStatus(sRef, begin, end) {
 	var data = { sRef: sRef, begin: begin, end: end };
 	$.getJSON(url, data, function(result){
 		var obj = $('#img-'+begin+'-'+end);
-		obj.removeClass("ow_i_disabled");
-		obj.removeClass("ow_i_enabled");
-		obj.addClass(result['disabled'] ? "ow_i_disabled" : "ow_i_enabled");
+		obj.removeClass("disable");
+		obj.addClass(result['disabled'] ? "disable" : ""); 
 	});
 }
 
@@ -567,26 +578,26 @@ function getStatusInfo() {
 		// Set Mute Status
 		if (statusinfo['muted'] == true) {
 			mutestatus = 1;
-			$("#volimage").attr("src","/images/volume_mute.png");
+			$(".volume_status").addClass("mute").removeClass("half");
 		} else {
 			mutestatus = 0;
-			$("#volimage").attr("src","/images/volume.png");
+			$(".volume_status").removeClass("mute").removeClass("half");
 		}
 
 		if ((statusinfo['currservice_station']) && ((statusinfo['currservice_serviceref'].indexOf("1:0:1") !== -1) || (statusinfo['currservice_serviceref'].indexOf("1:134:1") !== -1))) {
 			var stream = "";
 			if (statusinfo['transcoding']) {
-				stream += "<a href='#' onclick=\"jumper8001('" + statusinfo['currservice_serviceref'] + "', '" + statusinfo['currservice_station'] + "')\"; title='" + tstr_stream + ": " + statusinfo['currservice_station'] + "'><img src='../images/ico_stream.png'></img></a>&nbsp;";
-				stream += "<a href='#' onclick=\"jumper8002('" + statusinfo['currservice_serviceref'] + "', '" + statusinfo['currservice_station'] + "')\"; title='" + tstr_stream + " (" + tstr_transcoded + "): " + statusinfo['currservice_station'] + "'><img src='../images/ico_stream02.png'></img></a>&nbsp;";
+				stream += "<a href='#' class='streamlink' onclick=\"jumper8001('" + statusinfo['currservice_serviceref'] + "', '" + statusinfo['currservice_station'] + "')\"; title='" + tstr_stream + ": " + statusinfo['currservice_station'] + "'><i class='fa fa-desktop'></i></a>&nbsp;";
+				stream += "<a href='#' class='transcodelink' onclick=\"jumper8002('" + statusinfo['currservice_serviceref'] + "', '" + statusinfo['currservice_station'] + "')\"; title='" + tstr_stream + " (" + tstr_transcoded + "): " + statusinfo['currservice_station'] + "'><i class='fa fa-mobile'></i></a>&nbsp;";
 			} else {
-				stream += "<a target='_blank' href='/web/stream.m3u?ref=" + statusinfo['currservice_serviceref'] + "&name=" + statusinfo['currservice_station'] + "' title='" + tstr_stream + ": " + statusinfo['currservice_station'] + "'><img src='../images/ico_stream.png'></img></a>&nbsp;";
+				stream += "<a target='_blank' class='streamlink' href='/web/stream.m3u?ref=" + statusinfo['currservice_serviceref'] + "&name=" + statusinfo['currservice_station'] + "' title='" + tstr_stream + ": " + statusinfo['currservice_station'] + "'><i class='fa fa-desktop'></i></a>&nbsp;";
 			}
-			$("#osd").html(stream + "<span style='color:#EA7409;font-weight:bold'><a style='color:#EA7409;font-weight:bold;text-decoration:none;' href='#' onClick='load_maincontent(\"ajax/tv\");return false;'>" + statusinfo['currservice_station'] + "</a></span>&nbsp;&nbsp;" + statusinfo['currservice_begin'] + " - " + statusinfo['currservice_end'] + "&nbsp;&nbsp;" + "<a style='color:#ffffff;text-decoration:none;' href=\"#\" onclick=\"open_epg_pop('" + statusinfo['currservice_serviceref'] + "')\" title='" + statusinfo['currservice_fulldescription'] + "'>" + statusinfo['currservice_name'] + "</a>");
+			$("#osd").html(stream + "<a class='channellink' href='#' onClick='load_maincontent(\"ajax/tv\");return false;'>" + statusinfo['currservice_station'] + "</a></span>&nbsp;&nbsp;" + statusinfo['currservice_begin'] + " - " + statusinfo['currservice_end'] + "&nbsp;&nbsp;" + "<a style='color:#ffffff;text-decoration:none;' href=\"#\" onclick=\"open_epg_pop('" + statusinfo['currservice_serviceref'] + "')\" title='" + statusinfo['currservice_fulldescription'] + "'>" + statusinfo['currservice_name'] + "</a>");
 			$("#osd_bottom").html(statusinfo['currservice_description']);
 		} else if ((statusinfo['currservice_station']) && ((statusinfo['currservice_serviceref'].indexOf("1:0:2") !== -1) || (statusinfo['currservice_serviceref'].indexOf("1:134:2") !== -1))) {
 			var stream = "";
 			stream += "<a target='_blank' href='/web/stream.m3u?ref=" + statusinfo['currservice_serviceref'] + "&name=" + statusinfo['currservice_station'] + "' title='" + tstr_stream + ": " + statusinfo['currservice_station'] + "'><img src='../images/ico_stream.png'></img></a>&nbsp;";
-			$("#osd").html(stream + "<span style='color:#EA7409;font-weight:bold;'>" + "<a style='color:#EA7409;font-weight:bold;text-decoration:none;' href='#' onClick='load_maincontent(\"ajax/radio\");return false;'>" + statusinfo['currservice_station'] + "</a></span>&nbsp;&nbsp;" + statusinfo['currservice_begin'] + " - " + statusinfo['currservice_end'] + "&nbsp;&nbsp;" + "<a style='color:#ffffff;text-decoration:none;' href=\"#\" onclick=\"open_epg_pop('" + statusinfo['currservice_serviceref'] + "')\" title='" + statusinfo['currservice_fulldescription'] + "'>" + statusinfo['currservice_name'] + "</a>");
+			$("#osd").html(stream + "<a class='channellink' href='#' onClick='load_maincontent(\"ajax/radio\");return false;'>" + statusinfo['currservice_station'] + "</a></span>&nbsp;&nbsp;" + statusinfo['currservice_begin'] + " - " + statusinfo['currservice_end'] + "&nbsp;&nbsp;" + "<a style='color:#ffffff;text-decoration:none;' href=\"#\" onclick=\"open_epg_pop('" + statusinfo['currservice_serviceref'] + "')\" title='" + statusinfo['currservice_fulldescription'] + "'>" + statusinfo['currservice_name'] + "</a>");
 			$("#osd_bottom").html(statusinfo['currservice_description']);
 		} else if ((statusinfo['currservice_station']) && ((statusinfo['currservice_serviceref'].indexOf("1:0:0") !== -1))) {
 			var stream = "";
@@ -608,15 +619,15 @@ function getStatusInfo() {
 		var status = "";
 		if (statusinfo['isRecording'] == 'true') {
 			var timercall = "load_maincontent('ajax/timers'); return false;";
-			status = "<a href='#' onClick='load_maincontent(\"ajax/timers\"); return false;'><img src='../images/ico_rec.png' title='" + tstr_rec_status + statusinfo['Recording_list'] + "' alt='" + tstr_rec_status + "' /></a>";
+			status = "<a href='#' onClick='load_maincontent(\"ajax/timers\"); return false;' title='" + tstr_rec_status + statusinfo['Recording_list'] + "'><span class='recording'></i></a>";
 		}
-		status += "<a href='#' onClick='toggleStandby();return false'><img src='../images/ico_";
+		status += "<a href='#' onClick='toggleStandby();return false'><span class='";
 		if (statusinfo['inStandby'] == 'true') {
-			status += "standby.png' title='" + tstr_on + "' alt='" + tstr_standby;
+			status += "standby' title='" + tstr_on;
 		} else {
-			status += "on.png' title='" + tstr_standby + "' alt='" + tstr_on;
+			status += "on' title='" + tstr_standby;
 		}
-		status += "' width='58' height='24' /></a>";
+		status += "'></a>";
 		$("#osd_status").html(status);
 	}).error(function() {
 		$("#osd, #osd_bottom").html("");
@@ -624,6 +635,25 @@ function getStatusInfo() {
 }
 
 function grabScreenshot(mode) {
+
+$('#screenshotbutton0').click(function(){
+    $('ul#screenshotbutton li').removeClass("active");
+    $(this).addClass("active");
+    grabScreenshot('all');
+	});
+	
+	$('#screenshotbutton1').click(function(){
+    $('ul#screenshotbutton li').removeClass("active");
+    $(this).addClass("active");
+    grabScreenshot('video');
+	});
+	
+	$('#screenshotbutton2').click(function(){
+    $('ul#screenshotbutton li').removeClass("active");
+    $(this).addClass("active");
+    grabScreenshot('osd');
+	});
+	
 	$('#screenshotspinner').show();
 	
 	$('#screenshotimage').load(function(){
@@ -1089,9 +1119,13 @@ function InitBouquets(tv)
 	var mode="";
 	if (tv===true) {
 		$('#btn0').click(function(){
+      $('ul#tvbutton li').removeClass("active");
+      $(this).addClass("active");
 			$("#tvcontent").html(loadspinner).load("ajax/current");
 		});
 		$('#btn5').click(function(){
+      $('ul#tvbutton li').removeClass("active");
+      $(this).addClass("active");
 			$("#tvcontent").html(loadspinner).load('ajax/multiepg');
 		});
 
@@ -1100,19 +1134,26 @@ function InitBouquets(tv)
 		mode= "?stype=radio";
 	}
 	$('#btn1').click(function(){
+    $('ul#tvbutton li').removeClass("active");
+    $(this).addClass("active");
 		$("#tvcontent").html(loadspinner).load("ajax/bouquets" + mode);
 	});
 	$('#btn2').click(function(){
+    $('ul#tvbutton li').removeClass("active");
+    $(this).addClass("active");
 		$("#tvcontent").html(loadspinner).load("ajax/providers" + mode);
 	});
 	$('#btn3').click(function(){
+    $('ul#tvbutton li').removeClass("active");
+    $(this).addClass("active");
 		$("#tvcontent").load("ajax/satellites" + mode);
 	});
 	$('#btn4').click(function(){
+    $('ul#tvbutton li').removeClass("active");
+    $(this).addClass("active");
 		$("#tvcontent").html(loadspinner).load("ajax/channels" + mode);
 	});
 	
-	$("#tvbutton").buttonset();
 	$("#tvcontent").load("ajax/bouquets" + mode);
 	
 }
