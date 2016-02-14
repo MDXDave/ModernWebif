@@ -40,6 +40,7 @@ class RootController(BaseController):
 		self.putChild("grab", grabScreenshot(session))
 		self.putChild("mobile", MobileController(session))
 		self.putChild("js", static.File(getPublicPath() + "/js"))
+		self.putChild("fonts", static.File(getPublicPath() + "/fonts"))
 		self.putChild("css", static.File(getPublicPath() + "/css"))
 		self.putChild("static", static.File(getPublicPath() + "/static"))
 		self.putChild("images", static.File(getPublicPath() + "/images"))
