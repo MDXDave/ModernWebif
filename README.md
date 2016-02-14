@@ -1,3 +1,5 @@
+[![Build Status](https://img.shields.io/travis/MDXDave/ModernWebif/master.svg?style=flat-squared)](https://travis-ci.org/MDXDave/ModernWebif) [![Current release](https://img.shields.io/github/release/MDXDave/ModernWebif.svg?style=flat-squared)](https://github.com/MDXDave/ModernWebif/releases)
+
 ModernWebif
 =========
 Open Source Web Interface for E2 based Linux set-top box
