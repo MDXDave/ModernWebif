@@ -1,17 +1,19 @@
 language: python
 
 python:
-	- "2.7"
-	- "3.4"
+- "2.7"
+- "3.4"
+
 install:
-	- pip install python-pprint
-	- pip install python-cheetah
-	- pip install python-json
-	- pip install python-unixadmin
-	- pip install python-misc
-	- pip install python-twisted-web
-	- pip install python-pyopenssl
-	- pip install python-compression
+- pip install python-pprint
+- pip install python-cheetah
+- pip install python-json
+- pip install python-unixadmin
+- pip install python-misc
+- pip install python-twisted-web
+- pip install python-pyopenssl
+- pip install python-compression
+
 script: 
-	- python -m compileall -l . -l plugin -l plugin/backport -l plugin/controllers -l plugin/controllers/models
+- python -m compileall -l . -l plugin -l plugin/backport -l plugin/controllers -l plugin/controllers/models
 
