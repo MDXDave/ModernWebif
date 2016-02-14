@@ -187,7 +187,7 @@ class IpkgController(resource.Resource):
 		return server.NOT_DONE_YET
 
 	def ShowHint(self, request):
-		html = "<html><body><h1>OpenWebif Interface for OPKG</h1>"
+		html = "<html><body><h1>ModernWebif Interface for OPKG</h1>"
 		html += "Usage : ?command=<cmd>&package=packagename<&format=json><br>"
 		html += "Valid Commands:<br>list,listgz,listall,list_installed,list_installed,list_upgradable<br>"
 		html += "Valid Package Commands:<br>info,status,install,remove<br>"

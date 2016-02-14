@@ -9,7 +9,7 @@
 #                                                                            #
 ##############################################################################
 
-from Plugins.Extensions.OpenWebif.__init__ import _
+from Plugins.Extensions.ModernWebif.__init__ import _
 
 from Components.About import about
 from Components.config import config
@@ -41,12 +41,12 @@ import sys
 import time
 import string
 
-OPENWEBIFVER = "ModernWebif 0.9.0"
+ModernWebifVER = "0.10.0"
 
 STATICBOXINFO = None
 
-def getOpenWebifVer():
-	return OPENWEBIFVER
+def getModernWebifVer():
+	return ModernWebifVER
 
 def normalize_ipv6(orig):
 	net = []
@@ -234,7 +234,7 @@ def getInfo():
 		uptimetext = "?"
 	info['uptime'] = uptimetext
 
-	info["webifver"] = getOpenWebifVer()
+	info["modernwebifver"] = getModernWebifVer()
 	info['imagedistro'] = getImageDistro()
 	info['oever'] = getOEVersion()
 	info['imagever'] = getImageVersion() + '.' + getImageBuild()

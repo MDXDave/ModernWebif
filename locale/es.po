@@ -1,7 +1,7 @@
 # Administrador <hsa2000@gmail.com>, 2014.
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenWebif\n"
+"Project-Id-Version: ModernWebif\n"
 "POT-Creation-Date: 2014-11-01 19:04+0100\n"
 "PO-Revision-Date: 2015-09-12 13:52+0200\n"
 "Last-Translator: Joan González - Jglez3 <joan@gonzalezcrego.es>\n"
@@ -573,8 +573,8 @@ msgstr "Editor de Favoritos"
 msgid "(shift + click for long pressure)"
 msgstr "(shift + click para una larga presión)"
 
-msgid "Show Full OpenWebif"
-msgstr "Ver OpenWebif Completo"
+msgid "Show Full ModernWebif"
+msgstr "Ver ModernWebif Completo"
 
 msgid "Show full remote"
 msgstr "Ver control remoto completo"
@@ -1147,8 +1147,8 @@ msgstr "Por favor, introduce el nombre del archivo"
 msgid "Do you really want to restore from file"
 msgstr "¿Realmente deseas restaurar desde el archivo?"
 
-msgid "OpenWebif url: http://yourip:port"
-msgstr "Enlace OpenWebif: http://tuip:puerto"
+msgid "ModernWebif url: http://yourip:port"
+msgstr "Enlace ModernWebif: http://tuip:puerto"
 
 msgid "OpenWebInterface Enabled"
 msgstr "Enlace OpenWebInterface"
@@ -1189,8 +1189,8 @@ msgstr "Añadir nombre de servicio a la información de stream"
 msgid "Character encoding for EPG data"
 msgstr "Codificación de caracteres para los datos del EPG"
 
-msgid "OpenWebif Configuration"
-msgstr "Configuración OpenWebif"
+msgid "ModernWebif Configuration"
+msgstr "Configuración ModernWebif"
 
 msgid "transcoded"
 msgstr "transcodificado"

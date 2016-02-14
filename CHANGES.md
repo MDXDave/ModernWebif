@@ -1,3 +1,6 @@
+## Version 0.10.0
+* Renamed package to extensions-modernwebif
+
 ## Version 0.9.1
 **BUGFIXES**
 * Fixed icons not shown

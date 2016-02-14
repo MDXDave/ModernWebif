@@ -104,7 +104,7 @@ def getMovieList(directory=None, tag=None, rargs=None, locations=None):
 			ff = eServiceReference("2:0:1:0:0:0:0:0:0:0:" + f)
 			folders.append(ff)
 
-	if config.OpenWebif.parentalenabled.value:
+	if config.ModernWebif.parentalenabled.value:
 		dir_is_protected = checkParentalProtection(directory)
 	else:
 		dir_is_protected = False

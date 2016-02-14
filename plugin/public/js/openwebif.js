@@ -1,12 +1,10 @@
 //******************************************************************************
-//* openwebif.js: openwebif base module
+//* openwebif.js: ModernWebif base module
 //* Version 1.0
 //******************************************************************************
 //* Copyright (C) 2011-2014 E2OpenPlugins
 //* Copyright (C) 2016 MDXDave
 //*
-//* V 1.0 - Initial Version
-//* V 1.1 - add movie move and rename
 //*
 //* Authors: skaman <sandro # skanetwork.com>
 //* 		 meo
@@ -18,7 +16,7 @@
 //*      MDXDave
 //*
 //* License GPL V2
-//* https://github.com/E2OpenPlugins/e2openplugin-OpenWebif/blob/master/LICENSE.txt
+//* https://github.com/MDXDave/ModernWebif/blob/master/LICENSE.txt
 //*******************************************************************************
 
 $.fx.speeds._default = 1000;
@@ -206,7 +204,7 @@ function initJsTranslation(strings) {
 	tstr_open_in_new_window = strings.open_in_new_window;
 }
 
-function wait_for_openwebif() {
+function wait_for_ModernWebif() {
 	var restartCheck = window.setInterval(function() {
 		$.getJSON('/api/statusinfo').success(function() {
 			window.clearInterval(restartCheck);
@@ -221,11 +219,11 @@ function handle_power_state_dialog(new_power_state) {
 	$("#modaldialog").dialog('close');
 	if ( new_power_state === 2 ) {
 		load_info_dialog('ajax/rebootdialog',tstr_reboot_box);
-		wait_for_openwebif();
+		wait_for_ModernWebif();
 		timeout = 1000 ;
 	} else if ( new_power_state === 3 ) {
 		load_info_dialog('ajax/rebootdialog',tstr_restart_gui);
-		wait_for_openwebif();
+		wait_for_ModernWebif();
 		timeout = 1000 ;
 	}
 	setTimeout(function () {

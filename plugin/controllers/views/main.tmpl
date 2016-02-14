@@ -1,4 +1,4 @@
-#from Plugins.Extensions.OpenWebif.local import tstrings
+#from Plugins.Extensions.ModernWebif.local import tstrings
 #from json import dumps
 <!doctype html5>
 <html>
@@ -20,9 +20,9 @@
 		<div id="header">
 			<h1><a href="/">Modern<span class="off">Webif</span></a></h1>
 			#if $showname
-			<h2>$tstrings['openwebif_header']<br /><span class="off">$boxname</span></h2>
+			<h2>$tstrings['modernwebif_header']<br /><span class="off">$boxname</span></h2>
 			#else
-			<h2>$tstrings['openwebif_header']</h2>
+			<h2>$tstrings['modernwebif_header']</h2>
 			#end if
 		</div>
 		
@@ -208,7 +208,7 @@
 			<div id="content_container">
 			$content
 			</div>
-			<div id="footer"><h3>&nbsp;&nbsp;<a href="https://github.com/E2OpenPlugins">E2OpenPlugins</a> | <a href="http://www.opena.tv">openATV</a> | <a href="http://www.vuplus-community.net">Black Hole</a> | <a href="http://www.egami-image.com">EGAMI</a> | <a href="http://www.hdfreaks.cc">OpenHDF</a> | <a href="http://www.hdmedia-universe.com">HDMU</a> | <a href="http://openpli.org">OpenPli</a> | <a href="http://forum.sifteam.eu">Sif</a> | <a href="http://openspa.info">OpenSpa</a> | <a href="http://www.world-of-satellite.com">OpenViX</a> | <a href="http://www.droidsat.org">OpenDroid</a> | <a href="http://www.vuplus-support.org">VTi</a></h3></div>
+			<div id="footer"><h3>&nbsp;&nbsp;<a href="https://github.com/MDXDave/ModernWebif">ModernWebif</a> | <a href="https://github.com/E2OpenPlugins">E2OpenPlugins</a> | <a href="http://www.opena.tv">openATV</a> | <a href="http://www.vuplus-community.net">Black Hole</a> | <a href="http://www.egami-image.com">EGAMI</a> | <a href="http://www.hdfreaks.cc">OpenHDF</a> | <a href="http://www.hdmedia-universe.com">HDMU</a> | <a href="http://openpli.org">OpenPli</a> | <a href="http://forum.sifteam.eu">Sif</a> | <a href="http://openspa.info">OpenSpa</a> | <a href="http://www.world-of-satellite.com">OpenViX</a> | <a href="http://www.droidsat.org">OpenDroid</a> | <a href="http://www.vuplus-support.org">VTi</a></h3></div>
 		</div>
 	</div>
 	<form name="portForm" action="web/stream.m3u" method="GET" target="_blank">

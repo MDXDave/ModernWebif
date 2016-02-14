@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenWebif\n"
+"Project-Id-Version: ModernWebif\n"
 "POT-Creation-Date: 2014-11-01 19:04+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
@@ -572,7 +572,7 @@ msgstr "Редактор букетів"
 msgid "(shift + click for long pressure)"
 msgstr "(shift + кнопка = довге натискання)"
 
-msgid "Show Full OpenWebif"
+msgid "Show Full ModernWebif"
 msgstr "Показати весь веб-інтерфейс"
 
 msgid "Show full remote"
@@ -1146,8 +1146,8 @@ msgstr "Будь ласка, введіть назву файлу"
 msgid "Do you really want to restore from file"
 msgstr "Ви дійсно хочете відновити з файлу?"
 
-msgid "OpenWebif url: http://yourip:port"
-msgstr "OpenWebif url: http://IP ресивера:порт"
+msgid "ModernWebif url: http://yourip:port"
+msgstr "ModernWebif url: http://IP ресивера:порт"
 
 msgid "OpenWebInterface Enabled"
 msgstr "Вэб-інтерфейс включений"
@@ -1188,8 +1188,8 @@ msgstr "Додати назву сервісу в інформацію стри�
 msgid "Character encoding for EPG data"
 msgstr "Тип кодування тексту для даних EPG"
 
-msgid "OpenWebif Configuration"
-msgstr "Налаштування OpenWebif"
+msgid "ModernWebif Configuration"
+msgstr "Налаштування ModernWebif"
 
 msgid "transcoded"
 msgstr "транскодування"

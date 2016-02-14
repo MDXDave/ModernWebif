@@ -74,7 +74,7 @@ def zapService(session, id, title = ""):
 	isRecording = isRecording and isRecording.startswith("/")
 
 	if not isRecording:
-		if config.ParentalControl.servicepinactive.value and config.OpenWebif.parentalenabled.value:
+		if config.ParentalControl.servicepinactive.value and config.ModernWebif.parentalenabled.value:
 			if getProtection(service.toString()) != "0":
 				return {
 					"result": False,
@@ -116,7 +116,7 @@ def remoteControl(key, type = "", rcu = ""):
 			if HardwareInfo().get_device_model() in ("xp1000", "formuler1", "formuler3", "et9000", "et9200", "hd1100", "hd1200"):
 				remotetype = "dreambox advanced remote control (native)"
 		except:
-			print "[OpenWebIf] wrong hw detection"
+			print "[ModernWebif] wrong hw detection"
 
 	amap = eActionMap.getInstance()
 	if type == "long":

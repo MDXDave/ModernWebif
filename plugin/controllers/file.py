@@ -52,10 +52,10 @@ class FileController(resource.Resource):
 				if "name" in request.args:
 					name = request.args["name"][0]
 
-				port = config.OpenWebif.port.value
+				port = config.ModernWebif.port.value
 				proto = 'http'
 				if request.isSecure():
-					port = config.OpenWebif.https_port.value
+					port = config.ModernWebif.https_port.value
 					proto = 'https'
 				ourhost = request.getHeader('host')
 				m = re.match('.+\:(\d+)$', ourhost)

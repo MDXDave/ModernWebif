@@ -15,9 +15,9 @@ mkdir -p ${P}/CONTROL
 mkdir -p ${B}
 
 cat > ${P}/CONTROL/control << EOF
-Package: enigma2-plugin-extensions-openwebif
+Package: enigma2-plugin-extensions-modernwebif
 Version: ${VER}-${GITVER}-r0
-Description: OpenWebIf with modernised Interface
+Description: Webinterface for controlling your receiver
 Architecture: all
 Section: extra
 Priority: optional
@@ -27,12 +27,12 @@ Depends: python-json, python-cheetah, python-pyopenssl, python-unixadmin, python
 Source: https://github.com/MDXDave/ModernWebIf
 EOF
 
-mkdir -p ${P}/usr/lib/enigma2/python/Plugins/Extensions/OpenWebif/
-cp -rp ${D}/plugin/* ${P}/usr/lib/enigma2/python/Plugins/Extensions/OpenWebif/
+mkdir -p ${P}/usr/lib/enigma2/python/Plugins/Extensions/ModernWebif/
+cp -rp ${D}/plugin/* ${P}/usr/lib/enigma2/python/Plugins/Extensions/ModernWebif/
 for f in $(find ./locale -name *.po ); do
 	l=$(echo ${f%} | sed 's/\.po//' | sed 's/.*locale\///')
-	mkdir -p ${P}/usr/lib/enigma2/python/Plugins/Extensions/OpenWebif/locale/${l%}/LC_MESSAGES
-	msgfmt -o ${P}/usr/lib/enigma2/python/Plugins/Extensions/OpenWebif/locale/${l%}/LC_MESSAGES/OpenWebif.mo ./locale/$l.po
+	mkdir -p ${P}/usr/lib/enigma2/python/Plugins/Extensions/ModernWebif/locale/${l%}/LC_MESSAGES
+	msgfmt -o ${P}/usr/lib/enigma2/python/Plugins/Extensions/ModernWebif/locale/${l%}/LC_MESSAGES/ModernWebif.mo ./locale/$l.po
 done
 
 tar -C ${P} -czf ${B}/data.tar.gz . --exclude=CONTROL

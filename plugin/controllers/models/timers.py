@@ -18,7 +18,7 @@ from ServiceReference import ServiceReference
 from time import time, strftime, localtime, mktime
 from urllib import unquote
 from info import GetWithAlternative
-from Plugins.Extensions.OpenWebif.__init__ import _
+from Plugins.Extensions.ModernWebif.__init__ import _
 
 def getTimers(session):
 	rt = session.nav.RecordTimer

@@ -43,10 +43,10 @@ def getStream(session, request, m3ufile):
 	progopt = ''
 	if "name" in request.args:
 		name = request.args["name"][0]
-		if config.OpenWebif.service_name_for_stream.value:
+		if config.ModernWebif.service_name_for_stream.value:
 			progopt="#EXTINF:-1,%s\n" % name
 	
-	portNumber = config.OpenWebif.streamport.value
+	portNumber = config.ModernWebif.streamport.value
 	info = getInfo()
 	model = info["model"]
 	machinebuild = info["machinebuild"]
@@ -85,7 +85,7 @@ def getStream(session, request, m3ufile):
 				args = "?bitrate=%s" % (bitrate)
 
 	# When you use EXTVLCOPT:program in a transcoded stream, VLC does not play stream
-	if config.OpenWebif.service_name_for_stream.value and sRef != '' and portNumber != transcoder_port:
+	if config.ModernWebif.service_name_for_stream.value and sRef != '' and portNumber != transcoder_port:
 		progopt="%s#EXTVLCOPT:program=%d\n" % (progopt, int(sRef.split(':')[3],16))
 
 	response = "#EXTM3U \n#EXTVLCOPT--http-reconnect=true \n%shttp://%s:%s/%s%s\n" % (progopt,request.getRequestHostname(), portNumber, sRef, args)
@@ -120,7 +120,7 @@ def getTS(self, request):
 			if line6:
 				seconds = float(line6.strip()) / 90000 # In seconds
 
-			if config.OpenWebif.service_name_for_stream.value:
+			if config.ModernWebif.service_name_for_stream.value:
 				progopt="%s#EXTINF:%d,%s\n" % (progopt, seconds, name)
 
 			metafile.close()
@@ -148,7 +148,7 @@ def getTS(self, request):
 		if machinebuild in ('inihdp', 'hd2400', 'et10000'):
 			if "device" in request.args :
 				if request.args["device"][0] == "phone" :
-					portNumber = config.OpenWebif.streamport.value
+					portNumber = config.ModernWebif.streamport.value
 					bitrate = config.plugins.transcodingsetup.bitrate.value
 					resolution = config.plugins.transcodingsetup.resolution.value
 					(width, height) = tuple(resolution.split('x'))
@@ -159,19 +159,19 @@ def getTS(self, request):
 		elif machinebuild in ('ew7356'):
 			if "device" in request.args :
 				if request.args["device"][0] == "phone" :
-					portNumber = config.OpenWebif.streamport.value
+					portNumber = config.ModernWebif.streamport.value
 					bitrate = config.plugins.transcodingsetup.bitrate.value
 					framrate = config.plugins.transcodingsetup.framerate.value
 					args = "?bitrate=%s" % (bitrate)
 
 		# When you use EXTVLCOPT:program in a transcoded stream, VLC does not play stream
-		if config.OpenWebif.service_name_for_stream.value and sRef != '' and portNumber != transcoder_port:
+		if config.ModernWebif.service_name_for_stream.value and sRef != '' and portNumber != transcoder_port:
 			progopt="%s#EXTVLCOPT:program=%d\n" % (progopt, int(sRef.split(':')[3],16))
 
 		if portNumber is None:
-			portNumber = config.OpenWebif.port.value
+			portNumber = config.ModernWebif.port.value
 			if request.isSecure():
-				portNumber = config.OpenWebif.https_port.value
+				portNumber = config.ModernWebif.https_port.value
 				proto = 'https'
 			ourhost = request.getHeader('host')
 			m = re.match('.+\:(\d+)$', ourhost)

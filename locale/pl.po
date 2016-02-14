@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenWebif\n"
+"Project-Id-Version: ModernWebif\n"
 "POT-Creation-Date: 2015-09-14 08:10+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: mickey <mickeyreg@gmail.com>\n"
@@ -187,7 +187,7 @@ msgid "December"
 msgstr "Grudzień"
 
 msgid "About"
-msgstr "O OpenWebif"
+msgstr "O ModernWebif"
 
 msgid "Add Timer"
 msgstr "Dodaj zadanie planowe"
@@ -567,7 +567,7 @@ msgstr "Edytor bukietów"
 msgid "(shift + click for long pressure)"
 msgstr "(długie naciśnięcie: shift + kliknij)"
 
-msgid "Show Full OpenWebif"
+msgid "Show Full ModernWebif"
 msgstr "Pokaż pełny interfejs"
 
 msgid "Show full remote"
@@ -1141,11 +1141,11 @@ msgstr "Podaj nazwę pliku"
 msgid "Do you really want to restore from file"
 msgstr "Czy na pewno chcesz przywrócić z pliku"
 
-msgid "OpenWebif url: http://yourip:port"
-msgstr "Adres OpenWebif:  http://ip_tunera:port"
+msgid "ModernWebif url: http://yourip:port"
+msgstr "Adres ModernWebif:  http://ip_tunera:port"
 
 msgid "OpenWebInterface Enabled"
-msgstr "Interfejs OpenWebif włączony"
+msgstr "Interfejs ModernWebif włączony"
 
 msgid "HTTP port"
 msgstr "Port HTTP"
@@ -1183,8 +1183,8 @@ msgstr "Dodaj nazwę kanału do info strumienia"
 msgid "Character encoding for EPG data"
 msgstr "Kodowanie znaków dla danych EPG"
 
-msgid "OpenWebif Configuration"
-msgstr "Konfiguracja OpenWebif"
+msgid "ModernWebif Configuration"
+msgstr "Konfiguracja ModernWebif"
 
 msgid "transcoded"
 msgstr "transkodowane"

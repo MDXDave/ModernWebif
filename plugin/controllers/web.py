@@ -9,7 +9,7 @@
 #                                                                            #
 ##############################################################################
 
-from Plugins.Extensions.OpenWebif.__init__ import _
+from Plugins.Extensions.ModernWebif.__init__ import _
 
 from Components.config import config
 
@@ -34,10 +34,10 @@ from stream import StreamController
 import re
 
 def whoami(request):
-	port = config.OpenWebif.port.value
+	port = config.ModernWebif.port.value
 	proto = 'http'
 	if request.isSecure():
-		port = config.OpenWebif.https_port.value
+		port = config.ModernWebif.https_port.value
 		proto = 'https'
 	ourhost = request.getHeader('host')
 	m = re.match('.+\:(\d+)$', ourhost)
@@ -191,7 +191,7 @@ class WebController(BaseController):
 		return getCurrentLocation()
 
 	def P_getallservices(self, request):
-		if not config.OpenWebif.xbmcservices.value:
+		if not config.ModernWebif.xbmcservices.value:
 			return getAllServices()
 
 		# rename services for xbmc
@@ -768,7 +768,7 @@ class WebController(BaseController):
 
 		ret = getSearchEpg(request.args["search"][0])
 		ret["title"] = "EPG Search '%s'" % request.args["search"][0]
-		ret["generator"] = "OpenWebif"
+		ret["generator"] = "ModernWebif"
 		ret["description"] = "%d result for '%s'" % (len(ret["events"]), request.args["search"][0])
 		return ret
 

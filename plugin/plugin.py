@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ##############################################################################
-#                         <<< OpenWebif >>>                                  #
+#                         <<< ModernWebif >>>                                  #
 #                                                                            #
 #                        2011 E2OpenPlugins                                  #
 #                                                                            #
@@ -30,34 +30,34 @@ from httpserver import HttpdStart, HttpdStop, HttpdRestart
 
 from __init__ import _
 
-config.OpenWebif = ConfigSubsection()
-config.OpenWebif.enabled = ConfigYesNo(default=True)
-config.OpenWebif.identifier = ConfigYesNo(default=True)
-config.OpenWebif.identifier.custom = ConfigYesNo(default=False)
-config.OpenWebif.identifier.text = ConfigText(default = "", fixed_size = False)
-config.OpenWebif.port = ConfigInteger(default = 80, limits=(1, 65535) )
-config.OpenWebif.streamport = ConfigInteger(default = 8001, limits=(1, 65535) )
-config.OpenWebif.auth = ConfigYesNo(default=False)
-config.OpenWebif.xbmcservices = ConfigYesNo(default=False)
-config.OpenWebif.webcache = ConfigSubsection()
+config.ModernWebif = ConfigSubsection()
+config.ModernWebif.enabled = ConfigYesNo(default=True)
+config.ModernWebif.identifier = ConfigYesNo(default=True)
+config.ModernWebif.identifier.custom = ConfigYesNo(default=False)
+config.ModernWebif.identifier.text = ConfigText(default = "", fixed_size = False)
+config.ModernWebif.port = ConfigInteger(default = 80, limits=(1, 65535) )
+config.ModernWebif.streamport = ConfigInteger(default = 8001, limits=(1, 65535) )
+config.ModernWebif.auth = ConfigYesNo(default=False)
+config.ModernWebif.xbmcservices = ConfigYesNo(default=False)
+config.ModernWebif.webcache = ConfigSubsection()
 # FIXME: anything better than a ConfigText?
-config.OpenWebif.webcache.collapsedmenus = ConfigText(default = "remote", fixed_size = False)
-config.OpenWebif.webcache.remotegrabscreenshot = ConfigYesNo(default = True)
-config.OpenWebif.webcache.zapstream = ConfigYesNo(default = False)
-config.OpenWebif.webcache.epg_desc_search = ConfigYesNo(default = False)
+config.ModernWebif.webcache.collapsedmenus = ConfigText(default = "remote", fixed_size = False)
+config.ModernWebif.webcache.remotegrabscreenshot = ConfigYesNo(default = True)
+config.ModernWebif.webcache.zapstream = ConfigYesNo(default = False)
+config.ModernWebif.webcache.epg_desc_search = ConfigYesNo(default = False)
 # HTTPS
-config.OpenWebif.https_enabled = ConfigYesNo(default=False)
-config.OpenWebif.https_port = ConfigInteger(default = 443, limits=(1, 65535) )
-config.OpenWebif.https_auth = ConfigYesNo(default=True)
-config.OpenWebif.https_clientcert = ConfigYesNo(default=False)
-config.OpenWebif.parentalenabled = ConfigYesNo(default=False)
+config.ModernWebif.https_enabled = ConfigYesNo(default=False)
+config.ModernWebif.https_port = ConfigInteger(default = 443, limits=(1, 65535) )
+config.ModernWebif.https_auth = ConfigYesNo(default=True)
+config.ModernWebif.https_clientcert = ConfigYesNo(default=False)
+config.ModernWebif.parentalenabled = ConfigYesNo(default=False)
 # Use service name for stream
-config.OpenWebif.service_name_for_stream = ConfigYesNo(default=True)
+config.ModernWebif.service_name_for_stream = ConfigYesNo(default=True)
 # authentication for streaming
-config.OpenWebif.auth_for_streaming = ConfigYesNo(default=False)
-config.OpenWebif.no_root_access = ConfigYesNo(default=False)
+config.ModernWebif.auth_for_streaming = ConfigYesNo(default=False)
+config.ModernWebif.no_root_access = ConfigYesNo(default=False)
 # encoding of EPG data
-config.OpenWebif.epg_encoding = ConfigSelection(default = 'utf-8', choices = [ 'utf-8',
+config.ModernWebif.epg_encoding = ConfigSelection(default = 'utf-8', choices = [ 'utf-8',
 										'iso-8859-15',
 										'iso-8859-1',
 										'iso-8859-2',
@@ -72,9 +72,9 @@ config.OpenWebif.epg_encoding = ConfigSelection(default = 'utf-8', choices = [ '
 										'iso-8859-16'])
 imagedistro = getInfo()['imagedistro']
 
-class OpenWebifConfig(Screen, ConfigListScreen):
+class ModernWebifConfig(Screen, ConfigListScreen):
 	skin = """
-	<screen position="center,center" size="700,340" title="OpenWebif Configuration">
+	<screen position="center,center" size="700,340" title="ModernWebif Configuration">
 		<widget name="lab1" position="10,30" halign="center" size="680,60" zPosition="1" font="Regular;24" valign="top" transparent="1" />
 		<widget name="config" position="10,100" size="680,180" scrollbarMode="showOnDemand" />
 		<ePixmap position="140,290" size="140,40" pixmap="skin_default/buttons/red.png" alphatest="on" />
@@ -84,14 +84,14 @@ class OpenWebifConfig(Screen, ConfigListScreen):
 	</screen>"""
 
 	def __init__(self, session):
-		self.skin = OpenWebifConfig.skin
+		self.skin = ModernWebifConfig.skin
 		Screen.__init__(self, session)
 
 		self.list = []
 		ConfigListScreen.__init__(self, self.list)
 		self["key_red"] = Label(_("Cancel"))
 		self["key_green"] = Label(_("Save"))
-		self["lab1"] = Label(_("OpenWebif url: http://yourip:port"))
+		self["lab1"] = Label(_("ModernWebif url: http://yourip:port"))
 
 		self["actions"] = ActionMap(["WizardActions", "ColorActions"],
 		{
@@ -105,34 +105,34 @@ class OpenWebifConfig(Screen, ConfigListScreen):
 
 	def runSetup(self):
 		self.list = []
-		self.list.append(getConfigListEntry(_("OpenWebInterface Enabled"), config.OpenWebif.enabled))
-		if config.OpenWebif.enabled.value:
-			self.list.append(getConfigListEntry(_("Show box name in header"), config.OpenWebif.identifier))
-			if config.OpenWebif.identifier.value:
-				self.list.append(getConfigListEntry(_("Use custom box name"), config.OpenWebif.identifier.custom))
-				if config.OpenWebif.identifier.custom.value:
-					self.list.append(getConfigListEntry(_("Custom box name"), config.OpenWebif.identifier.text))
-			self.list.append(getConfigListEntry(_("HTTP port"), config.OpenWebif.port))
-			self.list.append(getConfigListEntry(_("Enable HTTP Authentication"), config.OpenWebif.auth))
-			self.list.append(getConfigListEntry(_("Enable HTTPS"), config.OpenWebif.https_enabled))
-			if config.OpenWebif.https_enabled.value:
-				self.list.append(getConfigListEntry(_("HTTPS port"), config.OpenWebif.https_port))
-				self.list.append(getConfigListEntry(_("Enable HTTPS Authentication"), config.OpenWebif.https_auth))
-				self.list.append(getConfigListEntry(_("Require client cert for HTTPS"), config.OpenWebif.https_clientcert))
-			if config.OpenWebif.auth.value:
-				self.list.append(getConfigListEntry(_("Enable Authentication for streaming"), config.OpenWebif.auth_for_streaming))
-				self.list.append(getConfigListEntry(_("Disable access for user root"), config.OpenWebif.no_root_access))
-			self.list.append(getConfigListEntry(_("Smart services renaming for XBMC"), config.OpenWebif.xbmcservices))
-			self.list.append(getConfigListEntry(_("Enable Parental Control"), config.OpenWebif.parentalenabled))
-			self.list.append(getConfigListEntry(_("Add service name to stream information"), config.OpenWebif.service_name_for_stream))
+		self.list.append(getConfigListEntry(_("ModernWebInterface Enabled"), config.ModernWebif.enabled))
+		if config.ModernWebif.enabled.value:
+			self.list.append(getConfigListEntry(_("Show box name in header"), config.ModernWebif.identifier))
+			if config.ModernWebif.identifier.value:
+				self.list.append(getConfigListEntry(_("Use custom box name"), config.ModernWebif.identifier.custom))
+				if config.ModernWebif.identifier.custom.value:
+					self.list.append(getConfigListEntry(_("Custom box name"), config.ModernWebif.identifier.text))
+			self.list.append(getConfigListEntry(_("HTTP port"), config.ModernWebif.port))
+			self.list.append(getConfigListEntry(_("Enable HTTP Authentication"), config.ModernWebif.auth))
+			self.list.append(getConfigListEntry(_("Enable HTTPS"), config.ModernWebif.https_enabled))
+			if config.ModernWebif.https_enabled.value:
+				self.list.append(getConfigListEntry(_("HTTPS port"), config.ModernWebif.https_port))
+				self.list.append(getConfigListEntry(_("Enable HTTPS Authentication"), config.ModernWebif.https_auth))
+				self.list.append(getConfigListEntry(_("Require client cert for HTTPS"), config.ModernWebif.https_clientcert))
+			if config.ModernWebif.auth.value:
+				self.list.append(getConfigListEntry(_("Enable Authentication for streaming"), config.ModernWebif.auth_for_streaming))
+				self.list.append(getConfigListEntry(_("Disable access for user root"), config.ModernWebif.no_root_access))
+			self.list.append(getConfigListEntry(_("Smart services renaming for XBMC"), config.ModernWebif.xbmcservices))
+			self.list.append(getConfigListEntry(_("Enable Parental Control"), config.ModernWebif.parentalenabled))
+			self.list.append(getConfigListEntry(_("Add service name to stream information"), config.ModernWebif.service_name_for_stream))
 			if imagedistro in ("VTi-Team Image"):
-				self.list.append(getConfigListEntry(_("Character encoding for EPG data"), config.OpenWebif.epg_encoding))
+				self.list.append(getConfigListEntry(_("Character encoding for EPG data"), config.ModernWebif.epg_encoding))
 
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
 
 	def setWindowTitle(self):
-		self.setTitle(_("OpenWebif Configuration"))
+		self.setTitle(_("ModernWebif Configuration"))
 
 	def keyLeft(self):
 		ConfigListScreen.keyLeft(self)
@@ -146,15 +146,15 @@ class OpenWebifConfig(Screen, ConfigListScreen):
 		for x in self["config"].list:
 			x[1].save()
 
-		if not config.OpenWebif.auth.value == True:
-			config.OpenWebif.auth_for_streaming.value = False
-			config.OpenWebif.auth_for_streaming.save()
+		if not config.ModernWebif.auth.value == True:
+			config.ModernWebif.auth_for_streaming.value = False
+			config.ModernWebif.auth_for_streaming.save()
 
-		if not config.OpenWebif.https_enabled.value == True:
-			config.OpenWebif.https_clientcert.value = False
-			config.OpenWebif.https_clientcert.save()
+		if not config.ModernWebif.https_enabled.value == True:
+			config.ModernWebif.https_clientcert.value = False
+			config.ModernWebif.https_clientcert.save()
 
-		if config.OpenWebif.enabled.value == True:
+		if config.ModernWebif.enabled.value == True:
 			HttpdRestart(global_session)
 		else:
 			HttpdStop(global_session)
@@ -166,7 +166,7 @@ class OpenWebifConfig(Screen, ConfigListScreen):
 		self.close()
 
 def confplug(session, **kwargs):
-		session.open(OpenWebifConfig)
+		session.open(ModernWebifConfig)
 
 def IfUpIfDown(reason, **kwargs):
 	if reason is True:
@@ -180,7 +180,7 @@ def startSession(reason, session):
 
 def main_menu(menuid, **kwargs):
 	if menuid == "network":
-		return [("OpenWebif", confplug, "openwebif", 45)]
+		return [("ModernWebif", confplug, "ModernWebif", 45)]
 	else:
 		return []
 
@@ -191,9 +191,9 @@ def Plugins(**kwargs):
 		]
 	screenwidth = getDesktop(0).size().width()
 	if imagedistro in ("openatv"):
-		result.append(PluginDescriptor(name="OpenWebif", description=_("OpenWebif Configuration"), where = PluginDescriptor.WHERE_MENU, fnc = main_menu))
+		result.append(PluginDescriptor(name="ModernWebif", description=_("ModernWebif Configuration"), where = PluginDescriptor.WHERE_MENU, fnc = main_menu))
 	if screenwidth and screenwidth == 1920:
-		result.append(PluginDescriptor(name="OpenWebif", description=_("OpenWebif Configuration"), icon="openwebifhd.png", where=[PluginDescriptor.WHERE_PLUGINMENU], fnc=confplug))
+		result.append(PluginDescriptor(name="ModernWebif", description=_("ModernWebif Configuration"), icon="modernwebifhd.png", where=[PluginDescriptor.WHERE_PLUGINMENU], fnc=confplug))
 	else:
-		result.append(PluginDescriptor(name="OpenWebif", description=_("OpenWebif Configuration"), icon="openwebif.png", where=[PluginDescriptor.WHERE_PLUGINMENU], fnc=confplug))
+		result.append(PluginDescriptor(name="ModernWebif", description=_("ModernWebif Configuration"), icon="modernwebif.png", where=[PluginDescriptor.WHERE_PLUGINMENU], fnc=confplug))
 	return result

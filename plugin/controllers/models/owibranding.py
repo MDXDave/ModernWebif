@@ -11,7 +11,7 @@
 # Simulate the oe-a boxbranding module (Only functions required by OWIF)     #
 ##############################################################################
 
-from Plugins.Extensions.OpenWebif.__init__ import _
+from Plugins.Extensions.ModernWebif.__init__ import _
 from Components.About import about
 from socket import has_ipv6
 from Tools.Directories import fileExists, pathExists

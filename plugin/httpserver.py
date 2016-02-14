@@ -33,10 +33,10 @@ listener = []
 
 def verifyCallback(connection, x509, errnum, errdepth, ok):
 	if not ok:
-		print '[OpenWebif] Invalid cert from subject: ', x509.get_subject()
+		print '[ModernWebif] Invalid cert from subject: ', x509.get_subject()
 		return False
 	else:
-		print '[OpenWebif] Successful cert authed as: ', x509.get_subject()
+		print '[ModernWebif] Successful cert authed as: ', x509.get_subject()
 	return True
 
 def isOriginalWebifInstalled():
@@ -52,9 +52,9 @@ def buildRootTree(session):
 	if not isOriginalWebifInstalled():
 		# this is an hack! any better idea?
 		origwebifpath = eEnv.resolve('${libdir}/enigma2/python/Plugins/Extensions/WebInterface')
-		hookpath = eEnv.resolve('${libdir}/enigma2/python/Plugins/Extensions/OpenWebif/pluginshook.src')
+		hookpath = eEnv.resolve('${libdir}/enigma2/python/Plugins/Extensions/ModernWebif/pluginshook.src')
 		if not os.path.islink(origwebifpath + "/WebChilds/Toplevel.py"):
-			print "[OpenWebif] hooking original webif plugins"
+			print "[ModernWebif] hooking original webif plugins"
 
 			cleanuplist = [
 				"/__init__.py",
@@ -84,7 +84,7 @@ def buildRootTree(session):
 			os.symlink(hookpath, origwebifpath + "/WebChilds/Toplevel.py")
 
 		# import modules
-#		print "[OpenWebif] loading external plugins..."
+#		print "[ModernWebif] loading external plugins..."
 		from Plugins.Extensions.WebInterface.WebChilds.Toplevel import loaded_plugins
 		if len(loaded_plugins) == 0:
 			externals = os.listdir(origwebifpath + "/WebChilds/External")
@@ -113,19 +113,19 @@ def buildRootTree(session):
 		if len(loaded_plugins) > 0:
 			for plugin in loaded_plugins:
 				root.putChild(plugin[0], plugin[1])
-#				print "[OpenWebif] plugin '%s' loaded on path '/%s'" % (plugin[2], plugin[0])
+#				print "[ModernWebif] plugin '%s' loaded on path '/%s'" % (plugin[2], plugin[0])
 		else:
-			print "[OpenWebif] no plugins to load"
+			print "[ModernWebif] no plugins to load"
 	return root
 
 def HttpdStart(session):
-	if config.OpenWebif.enabled.value == True:
+	if config.ModernWebif.enabled.value == True:
 		global listener
-		port = config.OpenWebif.port.value
+		port = config.ModernWebif.port.value
 
 		temproot = buildRootTree(session)
 		root = temproot
-		if config.OpenWebif.auth.value == True:
+		if config.ModernWebif.auth.value == True:
 			root = AuthResource(session, root)
 		site = server.Site(root)
 
@@ -137,20 +137,20 @@ def HttpdStart(session):
 			else:
 				# ipv4 only
 				listener.append( reactor.listenTCP(port, site) )
-			print "[OpenWebif] started on %i"% (port)
+			print "[ModernWebif] started on %i"% (port)
 			BJregisterService('http',port)
 		except CannotListenError:
-			print "[OpenWebif] failed to listen on Port %i" % (port)
+			print "[ModernWebif] failed to listen on Port %i" % (port)
 
-		if config.OpenWebif.https_clientcert.value == True and not os.path.exists(CA_FILE):
+		if config.ModernWebif.https_clientcert.value == True and not os.path.exists(CA_FILE):
 			# Disable https
-			config.OpenWebif.https_enabled.value = False
-			config.OpenWebif.https_enabled.save()
+			config.ModernWebif.https_enabled.value = False
+			config.ModernWebif.https_enabled.save()
 			# Inform the user
 			session.open(MessageBox, "Cannot read CA certs for HTTPS access\nHTTPS access is disabled!", MessageBox.TYPE_ERROR)
 
-		if config.OpenWebif.https_enabled.value == True:
-			httpsPort = config.OpenWebif.https_port.value
+		if config.ModernWebif.https_enabled.value == True:
+			httpsPort = config.ModernWebif.https_port.value
 			installCertificates(session)
 			# start https webserver on port configured port
 			try:
@@ -158,7 +158,7 @@ def HttpdStart(session):
 					context = ssl.DefaultOpenSSLContextFactory(KEY_FILE, CERT_FILE)
 				except:
 					# THIS EXCEPTION IS ONLY CATCHED WHEN CERT FILES ARE BAD (look below for error)
-					print "[OpenWebif] failed to get valid cert files. (It could occure bad file save or format, removing...)"
+					print "[ModernWebif] failed to get valid cert files. (It could occure bad file save or format, removing...)"
 					# removing bad files
 					if os.path.exists(KEY_FILE):
 						os.remove(KEY_FILE)
@@ -168,7 +168,7 @@ def HttpdStart(session):
 					installCertificates(session)
 					context = ssl.DefaultOpenSSLContextFactory(KEY_FILE, CERT_FILE)
 
-				if config.OpenWebif.https_clientcert.value == True:
+				if config.ModernWebif.https_clientcert.value == True:
 					ctx = context.getContext()
 					ctx.set_verify(
 						SSL.VERIFY_PEER | SSL.VERIFY_FAIL_IF_NO_PEER_CERT,
@@ -177,7 +177,7 @@ def HttpdStart(session):
 					ctx.load_verify_locations(CA_FILE)
 
 				sslroot = temproot
-				if config.OpenWebif.https_auth.value == True:
+				if config.ModernWebif.https_auth.value == True:
 					sslroot = AuthResource(session, sslroot)
 				sslsite = server.Site(sslroot)
 
@@ -187,15 +187,15 @@ def HttpdStart(session):
 				else:
 					# ipv4 only
 					listener.append( reactor.listenSSL(httpsPort, sslsite, context) )
-				print "[OpenWebif] started on", httpsPort
+				print "[ModernWebif] started on", httpsPort
 				BJregisterService('https',httpsPort)
 			except CannotListenError:
-				print "[OpenWebif] failed to listen on Port", httpsPort
+				print "[ModernWebif] failed to listen on Port", httpsPort
 			except:
-				print "[OpenWebif] failed to start https, disabling..."
+				print "[ModernWebif] failed to start https, disabling..."
 				# Disable https
-				config.OpenWebif.https_enabled.value = False
-				config.OpenWebif.https_enabled.save()
+				config.ModernWebif.https_enabled.value = False
+				config.ModernWebif.https_enabled.save()
 
 		#Streaming requires listening on 127.0.0.1:80
 		if port != 80:
@@ -208,9 +208,9 @@ def HttpdStart(session):
 				else:
 					# ipv4 only
 					listener.append( reactor.listenTCP(80, site, interface='127.0.0.1') )
-				print "[OpenWebif] started stream listening on port 80"
+				print "[ModernWebif] started stream listening on port 80"
 			except CannotListenError:
-				print "[OpenWebif] port 80 busy"
+				print "[ModernWebif] port 80 busy"
 
 
 def HttpdStop(session):
@@ -228,10 +228,10 @@ class AuthResource(resource.Resource):
 	def render(self, request):
 		host = request.getHost().host
 
-		if (host == "localhost" or host == "127.0.0.1" or host == "::ffff:127.0.0.1") and not config.OpenWebif.auth_for_streaming.value:
+		if (host == "localhost" or host == "127.0.0.1" or host == "::ffff:127.0.0.1") and not config.ModernWebif.auth_for_streaming.value:
 			return self.resource.render(request)
 		if self.login(request.getUser(), request.getPassword(), request.transport.socket.getpeername()[0]) == False:
-			request.setHeader('WWW-authenticate', 'Basic realm="%s"' % ("OpenWebif"))
+			request.setHeader('WWW-authenticate', 'Basic realm="%s"' % ("ModernWebif"))
 			errpage = resource.ErrorPage(http.UNAUTHORIZED,"Unauthorized","401 Authentication required")
 			return errpage.render(request)
 		else:
@@ -241,12 +241,12 @@ class AuthResource(resource.Resource):
 		session = request.getSession().sessionNamespaces
 		host = request.getHost().host
 
-		if ((host == "localhost" or host == "127.0.0.1" or host == "::ffff:127.0.0.1") and not config.OpenWebif.auth_for_streaming.value) or request.uri == "/web/getipv6":
+		if ((host == "localhost" or host == "127.0.0.1" or host == "::ffff:127.0.0.1") and not config.ModernWebif.auth_for_streaming.value) or request.uri == "/web/getipv6":
 			return self.resource.getChildWithDefault(path, request)
 		if "logged" in session.keys() and session["logged"]:
 			return self.resource.getChildWithDefault(path, request)
 		if self.login(request.getUser(), request.getPassword(), request.transport.socket.getpeername()[0]) == False:
-			request.setHeader('WWW-authenticate', 'Basic realm="%s"' % ("OpenWebif"))
+			request.setHeader('WWW-authenticate', 'Basic realm="%s"' % ("ModernWebif"))
 			errpage = resource.ErrorPage(http.UNAUTHORIZED,"Unauthorized","401 Authentication required")
 			return errpage
 		else:
@@ -254,7 +254,7 @@ class AuthResource(resource.Resource):
 			return self.resource.getChildWithDefault(path, request)
 
 	def login(self, user, passwd, peer):
-		if user=="root" and config.OpenWebif.no_root_access.value:
+		if user=="root" and config.ModernWebif.no_root_access.value:
 			# Override "no root" for logins from local network
 			match=re.match("(::ffff:|)(192\.168|10\.\d{1,3})\.\d{1,3}\.\d{1,3}", peer)
 			if match is None:
@@ -291,7 +291,7 @@ class StopServer:
 		global listener
 		self.server_to_stop = 0
 		for interface in listener:
-			print "[OpenWebif] Stopping server on port", interface.port
+			print "[ModernWebif] Stopping server on port", interface.port
 			deferred = interface.stopListening()
 			try:
 				self.server_to_stop += 1
@@ -320,15 +320,15 @@ def installCertificates(session):
 		certGenerator.installCertificates()
 	except IOError, e:
 		# Disable https
-		config.OpenWebif.https_enabled.value = False
-		config.OpenWebif.https_enabled.save()
+		config.ModernWebif.https_enabled.value = False
+		config.ModernWebif.https_enabled.save()
 		# Inform the user
 		session.open(MessageBox, "Cannot install generated SSL-Certifactes for https access\nHttps access is disabled!", MessageBox.TYPE_ERROR)
 # BJ
 def BJregisterService(protocol, port):
 	try:
 		from Plugins.Extensions.Bonjour.Bonjour import bonjour
-		service = bonjour.buildService(protocol, port, 'OpenWebif')
+		service = bonjour.buildService(protocol, port, 'ModernWebif')
 		bonjour.registerService(service, True)
 		return True
 

@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenWebif\n"
+"Project-Id-Version: ModernWebif\n"
 "POT-Creation-Date: 2014-11-01 19:04+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: plnick\n"
@@ -571,7 +571,7 @@ msgstr "Buket Editör"
 msgid "(shift + click for long pressure)"
 msgstr ""
 
-msgid "Show Full OpenWebif"
+msgid "Show Full ModernWebif"
 msgstr ""
 
 msgid "Show full remote"
@@ -1142,8 +1142,8 @@ msgstr "Lütfen dosya adı girin"
 msgid "Do you really want to restore from file"
 msgstr ""
 
-msgid "OpenWebif url: http://yourip:port"
-msgstr "OpenWebif url: http://yourip:port"
+msgid "ModernWebif url: http://yourip:port"
+msgstr "ModernWebif url: http://yourip:port"
 
 msgid "OpenWebInterface Enabled"
 msgstr "OpenWebInterface Etkin"
@@ -1184,8 +1184,8 @@ msgstr ""
 msgid "Character encoding for EPG data"
 msgstr ""
 
-msgid "OpenWebif Configuration"
-msgstr "OpenWebif Yapılandırma"
+msgid "ModernWebif Configuration"
+msgstr "ModernWebif Yapılandırma"
 
 msgid "transcoded"
 msgstr ""

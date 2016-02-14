@@ -19,12 +19,12 @@ from enigma import eServiceCenter, eServiceReference, iServiceInformation, eEPGC
 from time import time, localtime, strftime, mktime
 from info import getPiconPath, GetWithAlternative
 from urllib import quote, unquote
-from Plugins.Extensions.OpenWebif.local import tstrings #using the tstrings dic is faster than translating with _ func from __init__
+from Plugins.Extensions.ModernWebif.local import tstrings #using the tstrings dic is faster than translating with _ func from __init__
 
 try:
 	from collections import OrderedDict
 except ImportError:
-	from Plugins.Extensions.OpenWebif.backport.OrderedDict import OrderedDict
+	from Plugins.Extensions.ModernWebif.backport.OrderedDict import OrderedDict
 
 def filterName(name):
 	if name is not None:
@@ -336,7 +336,7 @@ def getChannels(idbouquet, stype):
 			chan = {}
 			chan['ref'] = quote(channel[0], safe=' ~@%#$&()*!+=:;,.?/\'')
 			chan['name'] = filterName(channel[1])
-			if config.OpenWebif.parentalenabled.value and config.ParentalControl.configured.value and config.ParentalControl.servicepinactive.value:
+			if config.ModernWebif.parentalenabled.value and config.ParentalControl.configured.value and config.ParentalControl.servicepinactive.value:
 				chan['protection'] = getProtection(channel[0])
 			else:
 				chan['protection'] = "0"
@@ -654,14 +654,14 @@ def getNowNextEpg(ref, servicetype):
 def getSearchEpg(sstr, endtime=None):
 	ret = []
 	ev = {}
-	if config.OpenWebif.epg_encoding.value != 'utf-8':
+	if config.ModernWebif.epg_encoding.value != 'utf-8':
 		try:
-			sstr = sstr.encode(config.OpenWebif.epg_encoding.value)
+			sstr = sstr.encode(config.ModernWebif.epg_encoding.value)
 		except UnicodeEncodeError:
 			pass
 	epgcache = eEPGCache.getInstance()
 	search_type = eEPGCache.PARTIAL_TITLE_SEARCH
-	if config.OpenWebif.webcache.epg_desc_search.value:
+	if config.ModernWebif.webcache.epg_desc_search.value:
 		search_type = eEPGCache.FULL_DESCRIPTION_SEARCH
 	events = epgcache.search(('IBDTSENR', 128, search_type, sstr, 1));
 	if events is not None:

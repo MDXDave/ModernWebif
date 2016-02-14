@@ -12,7 +12,7 @@ from Tools.Directories import fileExists
 from Components.config import config
 
 from models.services import getCurrentService, getBouquets, getChannels, getSatellites, getProviders, getEventDesc, getChannelEpg, getSearchEpg, getCurrentFullInfo, getMultiEpg, getEvent
-from models.info import getInfo, getPublicPath, getOpenWebifVer, getTranscodingSupport, getLanguage
+from models.info import getInfo, getPublicPath, getModernWebifVer, getTranscodingSupport, getLanguage
 from models.movies import getMovieList
 from models.timers import getTimers
 from models.config import getConfigs, getConfigsSections
@@ -86,7 +86,7 @@ class AjaxController(BaseController):
 
 	def P_about(self, request):
 		info = {}
-		info["owiver"] = getOpenWebifVer()
+		info["modernwebifver"] = getModernWebifVer()
 		return { "info": info }
 	
 	def P_boxinfo(self, request):
@@ -96,7 +96,7 @@ class AjaxController(BaseController):
 		if fileExists(getPublicPath("/images/boxes/"+type+".jpg")):
 			info["boximage"] = type+".jpg"
 		else:
-			info["boximage"] = "unknown.jpg"
+			info["boximage"] = "unknown.jpg?notfound"+type
 		return info
 
 	def P_epgpop(self, request):

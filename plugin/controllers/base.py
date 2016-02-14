@@ -9,7 +9,7 @@
 #                                                                            #
 ##############################################################################
 
-from Plugins.Extensions.OpenWebif.__init__ import _
+from Plugins.Extensions.ModernWebif.__init__ import _
 
 from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
 from twisted.web import server, http, static, resource, error
@@ -54,7 +54,7 @@ class BaseController(resource.Resource):
 	def error404(self, request):
 		request.setHeader("content-type", "text/html")
 		request.setResponseCode(http.NOT_FOUND)
-		request.write("<html><head><title>Open Webif</title></head><body><h1>Error 404: Page not found</h1><br />The requested URL was not found on this server.</body></html>")
+		request.write("<html><head><title>ModernWebif</title></head><body><h1>Error 404: Page not found</h1><br />The requested URL was not found on this server.</body></html>")
 		request.finish()
 
 	def loadTemplate(self, path, module, args):
@@ -105,16 +105,16 @@ class BaseController(resource.Resource):
 			data = func(request)
 			if data is None:
 #				if not self.suppresslog:
-#					print "[OpenWebif] page '%s' without content" % request.uri
+#					print "[ModernWebif] page '%s' without content" % request.uri
 				self.error404(request)
 			elif self.isCustom:
 #				if not self.suppresslog:
-#					print "[OpenWebif] page '%s' ok (custom)" % request.uri
+#					print "[ModernWebif] page '%s' ok (custom)" % request.uri
 				request.write(data)
 				request.finish()
 			elif self.isJson:
 #				if not self.suppresslog:
-#					print "[OpenWebif] page '%s' ok (json)" % request.uri
+#					print "[ModernWebif] page '%s' ok (json)" % request.uri
 				supported=[]
 				if self.isGZ:
 					acceptHeaders = request.requestHeaders.getRawHeaders('Accept-Encoding', [])
@@ -135,12 +135,12 @@ class BaseController(resource.Resource):
 				request.finish()
 			elif type(data) is str:
 #				if not self.suppresslog:
-#					print "[OpenWebif] page '%s' ok (simple string)" % request.uri
+#					print "[ModernWebif] page '%s' ok (simple string)" % request.uri
 				request.setHeader("content-type", "text/plain")
 				request.write(data)
 				request.finish()
 			else:
-#				print "[OpenWebif] page '%s' ok (cheetah template)" % request.uri
+#				print "[ModernWebif] page '%s' ok (cheetah template)" % request.uri
 				module = request.path
 				if module[-1] == "/":
 					module += "index"
@@ -150,7 +150,7 @@ class BaseController(resource.Resource):
 				module = module.replace(".", "")
 				out = self.loadTemplate(module, self.path, data)
 				if out is None:
-					print "[OpenWebif] ERROR! Template not found for page '%s'" % request.uri
+					print "[ModernWebif] ERROR! Template not found for page '%s'" % request.uri
 					self.error404(request)
 				else:
 					if self.withMainTemplate:
@@ -179,7 +179,7 @@ class BaseController(resource.Resource):
 					request.finish()
 
 		else:
-			print "[OpenWebif] page '%s' not found" % request.uri
+			print "[ModernWebif] page '%s' not found" % request.uri
 			self.error404(request)
 
 		# restore cached data
@@ -209,9 +209,9 @@ class BaseController(resource.Resource):
 			ret['epgsearchcaps'] = True
 		else:
 			ret['epgsearchcaps'] = False
-			if config.OpenWebif.webcache.epg_desc_search.value:
-				config.OpenWebif.webcache.epg_desc_search.value = False
-				config.OpenWebif.webcache.epg_desc_search.save()
+			if config.ModernWebif.webcache.epg_desc_search.value:
+				config.ModernWebif.webcache.epg_desc_search.value = False
+				config.ModernWebif.webcache.epg_desc_search.save()
 		ret['epgsearchtype'] = getEPGSearchType()['epgsearchtype']
 		extras = []
 		extras.append({ 'key': 'ajax/settings','description': _("Settings")})
@@ -236,7 +236,7 @@ class BaseController(resource.Resource):
 			extras.append({ 'key': 'ajax/at','description': _('AutoTimer')})
 		except ImportError:
 			pass
-		if fileExists(resolveFilename(SCOPE_PLUGINS, "Extensions/OpenWebif/controllers/views/ajax/bqe.tmpl")):
+		if fileExists(resolveFilename(SCOPE_PLUGINS, "Extensions/ModernWebif/controllers/views/ajax/bqe.tmpl")):
 			extras.append({ 'key': 'ajax/bqe','description': _('BouquetEditor')})
 		
 		try:

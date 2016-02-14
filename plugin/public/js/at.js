@@ -1,23 +1,17 @@
 //******************************************************************************
-//* at.js: openwebif Autotimer plugin
-//* Version 1.4
+//* at.js: ModernWebif Autotimer plugin
+//* Version 0.10.0
 //******************************************************************************
 //* Copyright (C) 2014 Joerg Bleyel
 //* Copyright (C) 2014 E2OpenPlugins
-//*
-//* V 1.0 - Initial Version
-//* V 1.1 - Support translation, small ui fixes
-//* V 1.2 - Optimize bouquets/channels selector
-//* V 1.3 - Allow alternatives as channel, small js fixes
-//* V 1.4 - fix timespan, offset, support series plugin
-//* V 1.5 - autotimer settings
-//* V 1.6 - sort autotimer list
+//* Copyright (C) 2016 MDXDave
 //*
 //* Authors: Joerg Bleyel <jbleyel # gmx.net>
 //* 		 plnick
+//*      MDXDave
 //*
 //* License GPL V2
-//* https://github.com/E2OpenPlugins/e2openplugin-OpenWebif/blob/master/LICENSE.txt
+//* https://github.com/MDXDave/ModernWebif/blob/master/LICENSE.txt
 //*******************************************************************************
 
 // TODO: backup/restore at, some error handler

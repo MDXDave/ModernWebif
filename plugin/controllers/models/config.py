@@ -7,27 +7,27 @@ from Tools.Directories import resolveFilename, SCOPE_CURRENT_PLUGIN, fileExists
 from os import path, listdir
 import xml.etree.cElementTree
 
-from Plugins.Extensions.OpenWebif.__init__ import _
+from Plugins.Extensions.ModernWebif.__init__ import _
 
 def addCollapsedMenu(name):
-	tags = config.OpenWebif.webcache.collapsedmenus.value.split("|")
+	tags = config.ModernWebif.webcache.collapsedmenus.value.split("|")
 	if name not in tags:
 		tags.append(name)
 
-	config.OpenWebif.webcache.collapsedmenus.value = "|".join(tags).strip("|")
-	config.OpenWebif.webcache.collapsedmenus.save()
+	config.ModernWebif.webcache.collapsedmenus.value = "|".join(tags).strip("|")
+	config.ModernWebif.webcache.collapsedmenus.save()
 	
 	return {
 		"result": True
 	}
 
 def removeCollapsedMenu(name):
-	tags = config.OpenWebif.webcache.collapsedmenus.value.split("|")
+	tags = config.ModernWebif.webcache.collapsedmenus.value.split("|")
 	if name in tags:
 		tags.remove(name)
 
-	config.OpenWebif.webcache.collapsedmenus.value = "|".join(tags).strip("|")
-	config.OpenWebif.webcache.collapsedmenus.save()
+	config.ModernWebif.webcache.collapsedmenus.value = "|".join(tags).strip("|")
+	config.ModernWebif.webcache.collapsedmenus.save()
 
 	return {
 		"result": True
@@ -36,12 +36,12 @@ def removeCollapsedMenu(name):
 def getCollapsedMenus():
 	return {
 		"result": True,
-		"collapsed": config.OpenWebif.webcache.collapsedmenus.value.split("|")
+		"collapsed": config.ModernWebif.webcache.collapsedmenus.value.split("|")
 	}
 
 def setRemoteGrabScreenshot(value):
-	config.OpenWebif.webcache.remotegrabscreenshot.value = value
-	config.OpenWebif.webcache.remotegrabscreenshot.save()
+	config.ModernWebif.webcache.remotegrabscreenshot.value = value
+	config.ModernWebif.webcache.remotegrabscreenshot.save()
 	return {
 		"result": True
 	}
@@ -49,12 +49,12 @@ def setRemoteGrabScreenshot(value):
 def getRemoteGrabScreenshot():
 	return {
 		"result": True,
-		"remotegrabscreenshot": config.OpenWebif.webcache.remotegrabscreenshot.value
+		"remotegrabscreenshot": config.ModernWebif.webcache.remotegrabscreenshot.value
 	}
 
 def setEPGSearchType(value):
-	config.OpenWebif.webcache.epg_desc_search.value = value
-	config.OpenWebif.webcache.epg_desc_search.save()
+	config.ModernWebif.webcache.epg_desc_search.value = value
+	config.ModernWebif.webcache.epg_desc_search.save()
 	return {
 		"result": True
 	}
@@ -62,12 +62,12 @@ def setEPGSearchType(value):
 def getEPGSearchType():
 	return {
 		"result": True,
-		"epgsearchtype": config.OpenWebif.webcache.epg_desc_search.value
+		"epgsearchtype": config.ModernWebif.webcache.epg_desc_search.value
 	}
 
 def setZapStream(value):
-	config.OpenWebif.webcache.zapstream.value = value
-	config.OpenWebif.webcache.zapstream.save()
+	config.ModernWebif.webcache.zapstream.value = value
+	config.ModernWebif.webcache.zapstream.save()
 	return {
 		"result": True
 	}
@@ -75,25 +75,25 @@ def setZapStream(value):
 def getZapStream():
 	return {
 		"result": True,
-		"zapstream": config.OpenWebif.webcache.zapstream.value
+		"zapstream": config.ModernWebif.webcache.zapstream.value
 	}
 
 def getShowName():
 	return {
 		"result": True,
-		"showname": config.OpenWebif.identifier.value
+		"showname": config.ModernWebif.identifier.value
 	}
 
 def getCustomName():
 	return {
 		"result": True,
-		"customname": config.OpenWebif.identifier.custom.value
+		"customname": config.ModernWebif.identifier.custom.value
 	}
 
 def getBoxName():
 	return {
 		"result": True,
-		"boxname": config.OpenWebif.identifier.text.value
+		"boxname": config.ModernWebif.identifier.text.value
 	}
 
 def getJsonFromConfig(cnf):
@@ -152,7 +152,7 @@ def getJsonFromConfig(cnf):
 			"current": cnf.value
 		}
 
-	print "[OpenWebif] Unknown class ", cnf.__class__.__name__
+	print "[ModernWebif] Unknown class ", cnf.__class__.__name__
 	return {
 		"result": False,
 		"type": "unknown"
@@ -185,7 +185,7 @@ def saveConfig(path, value):
 			cnf.value = value
 		cnf.save()
 	except Exception, e:
-		print "[OpenWebif] ", e
+		print "[ModernWebif] ", e
 		return {
 			"result": False
 		}
@@ -271,7 +271,7 @@ class ConfigFiles:
 	def parseConfigFiles(self):
 		sections = []
 		for setupfile in self.setupfiles:
-#			print "[OpenWebif] loading configuration file :", setupfile
+#			print "[ModernWebif] loading configuration file :", setupfile
 			setupfile = file(setupfile, 'r')
 			setupdom = xml.etree.cElementTree.parse(setupfile)
 			setupfile.close()
@@ -283,12 +283,12 @@ class ConfigFiles:
 					continue;
 				key = section.get("key")
 				if key not in self.allowedsections:
-					showOpenWebIF = section.get("showOpenWebIF")
-					if showOpenWebIF == "1":
+					showModernWebif = section.get("showModernWebif")
+					if showModernWebif == "1":
 						self.allowedsections.append(key)
 					else:
 						continue
-#				print "[OpenWebif] loading configuration section :", key
+#				print "[ModernWebif] loading configuration section :", key
 				for entry in section:
 					if entry.tag == "item":
 						requires = entry.get("requires")

@@ -91,6 +91,6 @@ class grabScreenshot(resource.Resource):
 		try:
 			self.request.finish()
 		except RuntimeError, error:
-			print "[OpenWebif] grabFinished error: %s" % error
+			print "[ModernWebif] grabFinished error: %s" % error
 		del self.request
 		del self.filepath
