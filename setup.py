@@ -5,6 +5,6 @@ import setup_translate
 
 pkg = 'Extensions.ModernWebif'
 setup (name = 'enigma2-plugin-extensions-modernwebif',
-	description = 'Webinterface for your reciver',
+	description = 'Webinterface for your receiver',
 	cmdclass = setup_translate.cmdclass,
 )
