@@ -8,6 +8,7 @@ Themed by MDXDave
 Known Issues
 -------
 * MultiEPG/Bouqueteditor not themed yet!
+* Minor glitches
 
 Screenshots
 -------
