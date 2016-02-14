@@ -31,4 +31,4 @@ python-compression
 
 License
 -------
-Licensed under the GNU General Public License, Version 2.0. See [LICENSE](https://github.com/MDXDave/ModernWebif/blob/master/LICENSE.txt) for more details.
+Licensed under the GNU General Public License, Version 2.0. See [LICENSE](https://github.com/MDXDave/ModernWebif/blob/master/LICENSE) for more details.
