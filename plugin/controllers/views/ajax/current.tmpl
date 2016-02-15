@@ -1,4 +1,5 @@
 #from Plugins.Extensions.ModernWebif.local import tstrings
+#if $varExists("now.title")
 <!-- OSD -->
 <style>
 .ia,.ib,.id{float:left;position:relative;margin:0 0 3px 3px;height:26px;}
@@ -244,3 +245,11 @@ $("#ns").html($("#ns").html() + PrintDH(v));
 #end raw
 
 </script>
+#else
+<div class="center">
+  <div class="container">
+    <i class="fa fa-exclamation-triangle"></i>
+    <span class="info">$tstrings["info_box_standby"]</span>
+  </div>
+</div>
+#end if
