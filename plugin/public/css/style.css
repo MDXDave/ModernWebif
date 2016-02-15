@@ -862,8 +862,21 @@ display: block;
     font-weight: bold;
 }
 
-.mlp { height:10px; width:70px; background:#1c478e url(../images/ui-bg_highlight-soft_55_1c478e_1x100.png) 50% 50% repeat-x;}
-.mlpp { height:8px;position:relative;background-color: white;border: 1px solid #4297d7;margin:0 !important;}
+.mlp { 
+    margin: 10px 0;
+    height: 5px;
+    padding: 0 !important;
+    background: #F0F7FC;
+}
+.mlpp { 
+    height: 5px;
+    padding: 0 !important;
+    width: 10%;
+    position: relative;
+    background-color: white;
+    margin: 0 !important;
+    background: #546E7A;
+}
 
 /* icons*/
 .ow_i { width:16px;height:16px; display:inline-block;background-image:url(/images/ico_x16.png);}

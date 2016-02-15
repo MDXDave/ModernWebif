@@ -42,16 +42,23 @@
               <strong>$movie.servicename</strong>
               <br />
               $movie.begintime ($movie.length min.)<br />
-              <br /> 
+              #set $w = $movie.lastseen
+              #if $w > 0
+                <div class="mlp"><div class="mlpp" style="width:$w%"></div></div>
+              #end if
 							<span style="color: #7F8181; font-weight: bold;">$movie.description</span>
 						</div>
 						<div>
 							<span style="color: #7F8181;">$movie.descriptionExtended</span>
 						</div>
 					#else
-					<div class="title">
+            <div class="title">
 							$movie.filename
 						</div>
+            #set $w = $movie.lastseen
+            #if $w > 0
+              <div class="mlp"><div class="mlpp" style="width:$w%"></div></div>
+            #end if
 					#end if
 				</div>
 				<div class="tm_buttons">
@@ -62,13 +69,6 @@
 						<a href="#" onclick="jumper8003('$quote($movie.filename)');" title="$tstrings['stream'] ($tstrings['transcoded']): $movie.eventname"><i class="fa fa-mobile"></i></a>
 						#else
 						<a target="_blank" href='web/ts.m3u?file=$quote($movie.filename)' title="$tstrings['stream'] $movie.eventname"><i class="fa fa-desktop smaller"></i></a>
-						#end if
-						#set $w = $movie.lastseen
-						#if $w > 0
-							#set $w = $w * 70 / 100
-							#set $size = str($w) + 'px'
-							<div class="mlp"><div class="mlpp" style="width:$size">
-							</div></div>
 						#end if
 						#set $eventname_escaped =  $movie.eventname.replace("'", r"\'")
 						<a href='/file?action=download&file=$quote($movie.filename)' title="$tstrings['download'] $movie.eventname"><i class="fa fa-download"></i></a>
