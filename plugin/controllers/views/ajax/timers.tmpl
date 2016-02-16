@@ -5,7 +5,7 @@
 	<div id="tvcontentmain">
 		<div id="toolbar-header">
 				<ul id="timerbuttons">
-					<li id="timerbutton0" onclick="addTimer(); return false" class="active">$tstrings['add_timer']</li>
+					<li id="timerbutton0" onclick="addTimer(); return false">$tstrings['add_timer']</li>
 					<li id="timerbutton1" onclick="cleanupTimer(); return false">$tstrings['cleanup_timer']</li>
 					<li id="timerbutton2" onclick="lastcontenturl='';load_maincontent('ajax/timers'); return false;">$tstrings['refresh_timer']</li>
 				</ul>
@@ -74,22 +74,7 @@
 #raw
 var reloadTimers = true;
 $(function() {
-  $('#timerbutton0').click(function(){
-    $('ul#timerbuttons li').removeClass("active");
-    $(this).addClass("active");
-  });
-  
-  $('#timerbutton1').click(function(){
-    $('ul#timerbuttons li').removeClass("active");
-    $(this).addClass("active");
-  });
-  
-  $('#timerbutton2').click(function(){
-    $('ul#timerbuttons li').removeClass("active");
-    $(this).addClass("active");
-  });
-
-	if(!timeredit_initialized)
+   if(!timeredit_initialized)
 		$('#editTimerForm').load('ajax/edittimer');
 });
 #end raw
