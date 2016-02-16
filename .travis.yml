@@ -10,4 +10,4 @@ install:
 
 script: 
 - python -m compileall -l . -l plugin -l plugin/backport -l plugin/controllers -l plugin/controllers/models
-
+- cheetah compile -R plugin
