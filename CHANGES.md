@@ -1,3 +1,7 @@
+## Version 0.10.1
+* Themed web remote (thanks to [sgs](http://www.opena.tv/members/sgs/))
+* Minor bug fixes
+
 ## Version 0.10.0
 * Renamed package to extensions-modernwebif
 
