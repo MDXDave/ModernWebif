@@ -362,11 +362,15 @@ function load_tvcontent_spin(url) {
 }
 
 function load_maincontent(url) {
-	if (lastcontenturl != url) {
-		$("#content_container").load(url);
-		lastcontenturl = url;
-		this.document.location.hash = "#"+url;
-	}
+  if(url.substr(0,4) == "http"){
+    window.open(url);
+  }else{
+    if (lastcontenturl != url) {
+      $("#content_container").load(url);
+      lastcontenturl = url;
+      this.document.location.hash = "#"+url;
+    }
+  }
 	return false;
 }
 

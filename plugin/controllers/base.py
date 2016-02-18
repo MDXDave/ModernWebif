@@ -23,6 +23,8 @@ import sys
 import json
 import gzip
 import cStringIO
+import ConfigParser
+import os
 
 from enigma import eEPGCache
 
@@ -192,7 +194,12 @@ class BaseController(resource.Resource):
 		return server.NOT_DONE_YET
 
 	def prepareMainTemplate(self):
-		# here will be generated the dictionary for the main template
+		from Components.Network import iNetwork
+		ifaces = iNetwork.getConfiguredAdapters()
+		if len(ifaces):
+				ip_list = iNetwork.getAdapterAttribute(ifaces[0], "ip") # use only the first configured interface
+				ip = "%d.%d.%d.%d" % (ip_list[0], ip_list[1], ip_list[2], ip_list[3])
+			
 		ret = getCollapsedMenus()
 		ret['remotegrabscreenshot'] = getRemoteGrabScreenshot()['remotegrabscreenshot']
 		ret['configsections'] = getConfigsSections()['sections']
@@ -218,11 +225,6 @@ class BaseController(resource.Resource):
 		if fileExists(resolveFilename(SCOPE_PLUGINS, "Extensions/LCD4linux/WebSite.pyo")):
 			lcd4linux_key = "lcd4linux/config"
 			if fileExists(resolveFilename(SCOPE_PLUGINS, "Extensions/WebInterface/plugin.pyo")):
-				from Components.Network import iNetwork
-				ifaces = iNetwork.getConfiguredAdapters()
-				if len(ifaces):
-					ip_list = iNetwork.getAdapterAttribute(ifaces[0], "ip") # use only the first configured interface
-					ip = "%d.%d.%d.%d" % (ip_list[0], ip_list[1], ip_list[2], ip_list[3])
 				try:
 					lcd4linux_port = "http://" + ip + ":" + str(config.plugins.Webinterface.http.port.value) + "/"
 					lcd4linux_key = lcd4linux_port + 'lcd4linux/config'
@@ -230,6 +232,13 @@ class BaseController(resource.Resource):
 					lcd4linux_key = None
 			if lcd4linux_key:
 				extras.append({ 'key': lcd4linux_key, 'description': _("LCD4Linux Setup")})
+		
+		if fileExists("/usr/keys/oscam_atv/oscam.conf"):
+				oscam_atv_config = ConfigParser.ConfigParser()
+				oscam_atv_config.readfp(open('/usr/keys/oscam_atv/oscam.conf'))
+				oscam_port = oscam_atv_config.get("webif","httpport");
+				oscam_link = "http://" + ip + ":" + oscam_port + "/"
+				extras.append({ 'key': oscam_link, 'description': _("OSCam Webinterface")})
 		
 		try:
 			from Plugins.Extensions.AutoTimer.AutoTimer import AutoTimer
