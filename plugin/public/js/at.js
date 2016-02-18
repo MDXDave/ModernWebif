@@ -1,12 +1,4 @@
 //******************************************************************************
-<<<<<<< HEAD
-//* at.js: ModernWebif Autotimer plugin
-//* Version 0.10.0
-//******************************************************************************
-//* Copyright (C) 2014 Joerg Bleyel
-//* Copyright (C) 2014 E2OpenPlugins
-//* Copyright (C) 2016 MDXDave
-=======
 //* at.js: openwebif Autotimer plugin
 //* Version 1.7
 //******************************************************************************
@@ -21,7 +13,6 @@
 //* V 1.5 - autotimer settings
 //* V 1.6 - sort autotimer list
 //* V 1.7 - fix autotimer filter
->>>>>>> 7c461d21cf0e895d0fce759bc17130ebc51c6fb4
 //*
 //* Authors: Joerg Bleyel <jbleyel # gmx.net>
 //* 		 plnick
