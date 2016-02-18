@@ -1,10 +1,27 @@
 //******************************************************************************
+<<<<<<< HEAD
 //* at.js: ModernWebif Autotimer plugin
 //* Version 0.10.0
 //******************************************************************************
 //* Copyright (C) 2014 Joerg Bleyel
 //* Copyright (C) 2014 E2OpenPlugins
 //* Copyright (C) 2016 MDXDave
+=======
+//* at.js: openwebif Autotimer plugin
+//* Version 1.7
+//******************************************************************************
+//* Copyright (C) 2014 Joerg Bleyel
+//* Copyright (C) 2014 E2OpenPlugins
+//*
+//* V 1.0 - Initial Version
+//* V 1.1 - Support translation, small ui fixes
+//* V 1.2 - Optimize bouquets/channels selector
+//* V 1.3 - Allow alternatives as channel, small js fixes
+//* V 1.4 - fix timespan, offset, support series plugin
+//* V 1.5 - autotimer settings
+//* V 1.6 - sort autotimer list
+//* V 1.7 - fix autotimer filter
+>>>>>>> 7c461d21cf0e895d0fce759bc17130ebc51c6fb4
 //*
 //* Authors: Joerg Bleyel <jbleyel # gmx.net>
 //* 		 plnick
@@ -272,6 +289,20 @@ function InitPage() {
 		width: 600,
 		height: 400,
 		buttons: buttons
+	});
+	
+	$( ".FM" ).change(function() {
+	
+		var nf = $(this).parent().parent();
+		if($(this).val()=="dayofweek") {
+			nf.find(".FS").show();
+			nf.find(".FI").hide();
+		}
+		else
+		{
+			nf.find(".FS").hide();
+			nf.find(".FI").show();
+		}
 	});
 }
 
