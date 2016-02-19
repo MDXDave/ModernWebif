@@ -191,10 +191,6 @@ a {
   text-decoration: none;
 }
 
-#spinner {
-  font-size: 38px;
-}
-
 span {
 
   &.on {
@@ -723,11 +719,12 @@ hr {
 
 #spinner {
   position: relative;
-  width: 120px;
-  height: 120px;
+  width: 0;
   left: 0;
-  top: 200px;
+  padding: 250px;
   z-index: 1;
+  font-size: 38px;
+  line-height: 38px;
 }
 
 #configuration {
