@@ -21,31 +21,31 @@
 $media-direction: max;
 @mixin breakpoint($values,$direction: $media-direction) {
   @if length($values) > 1 {
-  $min: nth($values,1);
-  $max: nth($values,2);
+    $min: nth($values, 1);
+    $max: nth($values, 2);
 
-  @if unitless($max) {
-    $max: $max + 0px;
+    @if unitless($max) {
+      $max: $max + 0px;
+    }
+
+    @if unitless($min) {
+      $min: $min + 0px
+    }
+
+    @media screen and (min-width: $min) and (max-width: $max) {
+      @content;
+    }
+
+  } @else {
+
+    @if unitless($values) {
+      $values: $values + 0px;
+    }
+
+    @media only screen and (#{$direction}-width: $values) {
+      @content;
+    }
   }
-
-  @if unitless($min) {
-    $min: $min + 0px
-  }
-
-  @media screen and (min-width: $min) and (max-width: $max) {
-    @content;
-  }
-
-} @else {
-
-  @if unitless($values) {
-    $values: $values + 0px;
-  }
-
-  @media only screen and (#{$direction}-width: $values) {
-    @content;
-  }
-}
 }
 
 body {
@@ -263,16 +263,16 @@ input#amount {
 #leftmenu {
   background: #fff;
   width: 15%;
-  @include breakpoint(1200){
+  @include breakpoint(1200) {
     width: 20%;
   }
-  @include breakpoint(900){
+  @include breakpoint(900) {
     width: 25%;
   }
-  @include breakpoint(680){
+  @include breakpoint(680) {
     width: 35%;
   }
-  @include breakpoint(400){
+  @include breakpoint(400) {
     width: 100%;
   }
   float: left;
@@ -418,14 +418,14 @@ button {
 
 #tvcontentmain {
   width: 100%;
-  height: 800px;
+  max-height: 80vh;
   margin: 0;
   padding: 0;
   border: 1px solid #B0BEC5;
 }
 
 #tvcontent, #timers, #movies {
-  height: 730px;
+  max-height: 70%;
   overflow: auto;
   padding-top: 4px;
   a {
@@ -600,16 +600,16 @@ i.fa-mobile {
   display: block;
   height: auto;
   margin-left: 15%;
-  @include breakpoint(1200){
+  @include breakpoint(1200) {
     margin-left: 20%;
   }
-  @include breakpoint(900){
+  @include breakpoint(900) {
     margin-left: 25%;
   }
-  @include breakpoint(680){
+  @include breakpoint(680) {
     margin-left: 35%;
   }
-  @include breakpoint(400){
+  @include breakpoint(400) {
     float: left;
     margin-left: 0;
   }
@@ -801,117 +801,118 @@ hr {
       font-weight: bold;
     }
   }
+}
 
-  .tm_buttons {
-    overflow: hidden;
-    font-size: 22px;
-    display: table-cell;
-    vertical-align: middle;
-    text-align: center;
-    position: relative;
-    div {
-      padding: initial;
-    }
-    a {
-      padding: 10px;
-      background: #607D8B;
-      display: table;
-      width: 22px;
-      text-align: center;
-      color: #FAFAFA;
-      &:hover {
-        background: #546E7A;
-      }
-      &:nth-child(4):before {
-        clear: left;
-        content: " ";
-        display: block;
-      }
-    }
+.tm_buttons {
+  overflow: hidden;
+  font-size: 22px;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  position: relative;
+  div {
+    padding: initial;
   }
-
-  .fa.fa-desktop.smaller {
-    font-size: 18px;
-  }
-
-  .fa.fa-check.disable {
-    color: rgba(255, 255, 255, 0.2);
-  }
-
-  .mlp {
-    margin: 10px 0;
-    height: 5px;
-    padding: 0 !important;
-    background: #F0F7FC;
-  }
-
-  .mlpp {
-    height: 5px;
-    padding: 0 !important;
-    width: 10%;
-    position: relative;
-    margin: 0 !important;
-    background: #546E7A;
-  }
-
-  .ui-datepicker {
-    background: #fff;
-    border: 1px solid #ccc;
-  }
-
-  /** Autotimer **/
-  #ateditcontent #actions button {
+  a {
     padding: 10px;
-    cursor: pointer;
-  }
-
-  #atbutton0:before {
-    font-family: FontAwesome;
-    content: "\f067";
-    display: inline-block;
-    padding-right: 10px;
-  }
-
-  #atbutton1:before {
-    @extend #atbutton0:before;
-    content: "\f00d";
-  }
-
-  #atbutton2:before {
-    @extend #atbutton0:before;
-    content: "\f021";
-  }
-
-  #atbutton3:before {
-    @extend #atbutton0:before;
-    content: "\f0c7";
-  }
-
-  #atlist {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    li {
-      cursor: pointer;
-      padding: 0.7em;
-      font-size: 1.1em;
-      height: 16px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      &:hover {
-        background: #607D8B;
-        color: #FAFAFA;
-      }
-    }
-    .ui-selecting {
-    }
     background: #607D8B;
-  }
-  .ui-selected {
-    background: #607D8B;
+    display: table;
+    width: 22px;
+    text-align: center;
     color: #FAFAFA;
+    &:hover {
+      background: #546E7A;
+    }
+    &:nth-child(4):before {
+      clear: left;
+      content: " ";
+      display: block;
+    }
   }
+}
+
+.fa.fa-desktop.smaller {
+  font-size: 18px;
+}
+
+.fa.fa-check.disable {
+  color: rgba(255, 255, 255, 0.2);
+}
+
+.mlp {
+  margin: 10px 0;
+  height: 5px;
+  padding: 0 !important;
+  background: #F0F7FC;
+}
+
+.mlpp {
+  height: 5px;
+  padding: 0 !important;
+  width: 10%;
+  position: relative;
+  margin: 0 !important;
+  background: #546E7A;
+}
+
+.ui-datepicker {
+  background: #fff;
+  border: 1px solid #ccc;
+}
+
+/** Autotimer **/
+#ateditcontent #actions button {
+  padding: 10px;
+  cursor: pointer;
+}
+
+#atbutton0:before {
+  font-family: FontAwesome;
+  content: "\f067";
+  display: inline-block;
+  padding-right: 10px;
+}
+
+#atbutton1:before {
+  @extend #atbutton0:before;
+  content: "\f00d";
+}
+
+#atbutton2:before {
+  @extend #atbutton0:before;
+  content: "\f021";
+}
+
+#atbutton3:before {
+  @extend #atbutton0:before;
+  content: "\f0c7";
+}
+
+#atlist {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  li {
+    cursor: pointer;
+    padding: 0.7em;
+    font-size: 1.1em;
+    height: 16px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    &:hover {
+      background: #607D8B;
+      color: #FAFAFA;
+    }
+  }
+  .ui-selecting {
+  }
+  background: #607D8B;
+}
+
+.ui-selected {
+  background: #607D8B;
+  color: #FAFAFA;
 }
 
 optgroup {
@@ -1039,13 +1040,12 @@ fieldset {
   overflow: auto;
 }
 
-html, body, #tvcontent {
+#tvcontent {
   width: 100%;
-  height: 100%;
+  height: auto;
 }
 
 .fht-table, .fht-table thead, .fht-table tfoot, .fht-table tbody, .fht-table tr, .fht-table th, .fht-table td {
-  font-size: 100%;
   font: inherit;
   vertical-align: top;
   margin: 0;
