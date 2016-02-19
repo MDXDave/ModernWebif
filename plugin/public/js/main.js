@@ -1,6 +1,6 @@
 //******************************************************************************
-//* openwebif.js: ModernWebif base module
-//* Version 1.0
+//* main.js: Base javascript
+//* Version 0.10.3
 //******************************************************************************
 //* Copyright (C) 2011-2014 E2OpenPlugins
 //* Copyright (C) 2016 MDXDave
