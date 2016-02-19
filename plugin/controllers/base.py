@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
 ##############################################################################
-#                        2011 E2OpenPlugins                                  #
+#                      (C) 2011 E2OpenPlugins                                #
+#                          (C) 2016 MDXDave 								 #
 #                                                                            #
 #  This file is open source software; you can redistribute it and/or modify  #
 #     it under the terms of the GNU General Public License version 2 as      #
