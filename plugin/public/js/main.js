@@ -557,8 +557,9 @@ function playRecording(sRef) {
 function zapChannel(sRef, sname) {
 	var url = '/api/zap?sRef=' + escape(sRef);
 	$.getJSON(url, function(result){
-		$("#osd").html(tstr_zap_to + ': ' + sname);
+		$("#osd").html("<i class=\"fa fa-spin fa-circle-o-notch\"></i> "+tstr_zap_to + ': ' + sname);
 		$("#osd_bottom").html(" ");
+		setTimeout(getStatusInfo, 1500);
 	});
 }
 
