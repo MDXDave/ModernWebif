@@ -1,7 +1,7 @@
 ## Version 0.10.3
-* Fixed issue #5
+* Fixed issue [#5](https://github.com/MDXDave/ModernWebif/issues/5)
 * Fixed autotimer bug [Issue #323](https://github.com/E2OpenPlugins/e2openplugin-OpenWebif/issues/323)
-* Fixed radio timer (PR #9)
+* Fixed radio timer ([PR #9](https://github.com/MDXDave/ModernWebif/pulls/9))
 * Minor bug fixes
 
 ## Version 0.10.2
@@ -16,9 +16,7 @@
 * Renamed package to extensions-modernwebif
 
 ## Version 0.9.1
-**BUGFIXES**
 * Fixed icons not shown
 
 ## Version 0.9.0
-**FEATURES**
 * Based on OpenWebif GIT Repository (date 2016-02-13)
