@@ -1,7 +1,8 @@
 ## Version 0.10.3
 * Fixed issue #5
 * Fixed autotimer bug [Issue #323](https://github.com/E2OpenPlugins/e2openplugin-OpenWebif/issues/323)
-* ...
+* Fixed radio timer (PR #9)
+* Minor bug fixes
 
 ## Version 0.10.2
 * Added link to oscam webinterface (if oscam_atv is installed)
