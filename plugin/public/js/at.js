@@ -248,7 +248,6 @@ function InitPage() {
 	$("#atbutton5").click(function () { simulateAT(); });
 	$("#atbutton6").click(function () { listTimers(); });
 	$("#atbutton7").click(function () { getAutoTimerSettings(); });
-	// TODO: icons
 
 	$('#errorbox').hide();
 	$("#simdlg").dialog({
