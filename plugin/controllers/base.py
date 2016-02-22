@@ -37,7 +37,7 @@ except:
 remote=''
 try:
 	from Components.RcModel import rc_model
-	remote = rc_model.getRcFolder() + "/remote"
+	remote = rc_model.getRcFolder()
 except:
 	from models.owibranding import rc_model
 	remote = rc_model().getRcFolder()

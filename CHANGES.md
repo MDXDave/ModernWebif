@@ -1,3 +1,7 @@
+## Version 0.10.4
+* Fixed fullremote (issue [#4](https://github.com/MDXDave/ModernWebif/issues/4))
+* Fixed displaying missing collapse/expand icon (issue [#11](https://github.com/MDXDave/ModernWebif/issues/11))
+
 ## Version 0.10.3
 * Fixed issue [#5](https://github.com/MDXDave/ModernWebif/issues/5)
 * Fixed autotimer bug [Issue #323](https://github.com/E2OpenPlugins/e2openplugin-OpenWebif/issues/323)
