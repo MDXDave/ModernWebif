@@ -284,10 +284,22 @@ input#amount {
   height: 16px;
   float: right;
   cursor: pointer;
+  position: relative;
+  &:after {
+    content: "\f068";
+    font-family: FontAwesome;
+    font-size: 14px;
+    font-weight: 300;
+    padding: 3px;
+    top: -1px;
+    position: absolute;
+  }
 }
 
 .leftmenu_icon_collapse {
-  background-position: -64px 0;
+  &:after {
+    content: "\f067";
+  }
 }
 
 #leftmenu_top {
