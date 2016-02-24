@@ -7,6 +7,11 @@ Based on [OpenWebif](https://github.com/E2OpenPlugins/e2openplugin-OpenWebif).
 
 Themed by MDXDave
 
+Tested on
+-------
+- Gigablue HD Quad Plus / OpenATV v5.1 + v5.2 Beta
+- Gigablue HD Quad Plus / OpenMips v4.3 Beta
+
 Known Issues
 -------
 * MultiEPG/Bouqueteditor not themed yet!
@@ -19,17 +24,6 @@ TV bouquets
 
 Timerlist
 ![Timerlist](screens/modernwebif_screen_2.png)
-
-Depends
--------
-python-pprint
-python-cheetah
-python-json
-python-unixadmin
-python-misc
-python-twisted-web
-python-pyopenssl
-python-compression
 
 License
 -------
