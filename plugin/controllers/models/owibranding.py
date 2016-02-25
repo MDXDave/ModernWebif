@@ -156,6 +156,14 @@ def getAllInfo():
 		procmodel = f.readline().strip()
 		f.close()
 		model = procmodel.title().replace("olose", "olo SE").replace("olo2se", "olo2 SE").replace("2", "²")
+		if fileExists("/proc/stb/info/boxtype"):
+			f = open("/proc/stb/info/boxtype",'r')
+			p = f.readline().strip().lower()
+			f.close()
+			if p == "osmini":
+				brand = "Edision"
+				model = "OS mini"
+				procmodel = p
 	elif fileExists("/proc/boxtype"):
 		f = open("/proc/boxtype",'r')
 		procmodel = f.readline().strip().lower()
@@ -379,6 +387,8 @@ def getAllInfo():
 	elif procmodel in ("dm7080", "dm7020hd", "dm7020hdv2", "dm800sev2", "dm500hdv2", "dm820"):
 		remote = "dmm2"
 	elif procmodel == "wetekplay":
+		remote = procmodel
+	elif procmodel == "osmini":
 		remote = procmodel
 
 	info['remote'] = remote
