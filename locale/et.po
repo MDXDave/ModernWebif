@@ -568,8 +568,8 @@ msgstr "Lemmiknimekirjad"
 msgid "(shift + click for long pressure)"
 msgstr "(shift + klõps = pikk nupuvajutus)"
 
-msgid "Show Full OpenWebif"
-msgstr "Kuva täielik OpenWebif"
+msgid "Show Full ModernWebif"
+msgstr "Kuva täielik ModernWebif"
 
 msgid "Show full remote"
 msgstr "Kuva  täielik pult"
@@ -1139,11 +1139,11 @@ msgstr "Sisesta failinimi"
 msgid "Do you really want to restore from file"
 msgstr "Kas taastad failist"
 
-msgid "OpenWebif url: http://yourip:port"
-msgstr "OpenWebif url: http://sinuip:port"
+msgid "ModernWebif url: http://yourip:port"
+msgstr "ModernWebif url: http://sinuip:port"
 
-msgid "OpenWebInterface Enabled"
-msgstr "OpenWebInterface lubatud"
+msgid "ModernWebif Enabled"
+msgstr "ModernWebif lubatud"
 
 msgid "HTTP port"
 msgstr "HTTP port"
