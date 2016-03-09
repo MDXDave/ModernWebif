@@ -12,7 +12,7 @@ from Tools.Directories import fileExists
 from Components.config import config
 
 from models.services import getCurrentService, getBouquets, getChannels, getSatellites, getProviders, getEventDesc, getChannelEpg, getSearchEpg, getCurrentFullInfo, getMultiEpg, getEvent
-from models.info import getInfo, getPublicPath, getModernWebifVer, getTranscodingSupport, getLanguage
+from models.info import getInfo, getPublicPath, getModernWebifVer
 from models.movies import getMovieList
 from models.timers import getTimers
 from models.config import getConfigs, getConfigsSections
@@ -96,7 +96,7 @@ class AjaxController(BaseController):
 		if fileExists(getPublicPath("/images/boxes/"+type+".jpg")):
 			info["boximage"] = type+".jpg"
 		else:
-			info["boximage"] = "unknown.jpg?notfound"+type
+			info["boximage"] = "unknown.jpg"
 		return info
 
 	def P_epgpop(self, request):

@@ -8,7 +8,6 @@
 # http://creativecommons.org/licenses/by-nc-sa/3.0/ or send a letter to Creative
 # Commons, 559 Nathan Abbott Way, Stanford, California 94305, USA.
 
-from Plugins.Extensions.OpenWebif.__init__ import _
 from enigma import eServiceReference, eServiceCenter, eDVBDB
 from Components.Sources.Source import Source
 from Screens.ChannelSelection import service_types_tv, MODE_TV, MODE_RADIO

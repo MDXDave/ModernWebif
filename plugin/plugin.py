@@ -45,6 +45,7 @@ config.ModernWebif.webcache.collapsedmenus = ConfigText(default = "remote", fixe
 config.ModernWebif.webcache.remotegrabscreenshot = ConfigYesNo(default = True)
 config.ModernWebif.webcache.zapstream = ConfigYesNo(default = False)
 config.ModernWebif.webcache.epg_desc_search = ConfigYesNo(default = False)
+config.OpenWebif.webcache.epg_desc_search = ConfigYesNo(default = False)
 # HTTPS
 config.ModernWebif.https_enabled = ConfigYesNo(default=False)
 config.ModernWebif.https_port = ConfigInteger(default = 443, limits=(1, 65535) )
@@ -58,6 +59,21 @@ config.ModernWebif.auth_for_streaming = ConfigYesNo(default=False)
 config.ModernWebif.no_root_access = ConfigYesNo(default=False)
 # encoding of EPG data
 config.ModernWebif.epg_encoding = ConfigSelection(default = 'utf-8', choices = [ 'utf-8',
+										'iso-8859-15',
+										'iso-8859-1',
+										'iso-8859-2',
+										'iso-8859-3',
+										'iso-8859-4',
+										'iso-8859-5',
+										'iso-8859-6',
+										'iso-8859-7',
+										'iso-8859-8',
+										'iso-8859-9',
+										'iso-8859-10',
+										'iso-8859-16'])
+imagedistro = getInfo()['imagedistro']
+# encoding of EPG data
+config.OpenWebif.epg_encoding = ConfigSelection(default = 'utf-8', choices = [ 'utf-8',
 										'iso-8859-15',
 										'iso-8859-1',
 										'iso-8859-2',
@@ -127,6 +143,8 @@ class ModernWebifConfig(Screen, ConfigListScreen):
 			self.list.append(getConfigListEntry(_("Add service name to stream information"), config.ModernWebif.service_name_for_stream))
 			if imagedistro in ("VTi-Team Image"):
 				self.list.append(getConfigListEntry(_("Character encoding for EPG data"), config.ModernWebif.epg_encoding))
+			if imagedistro in ("VTi-Team Image"):
+				self.list.append(getConfigListEntry(_("Character encoding for EPG data"), config.OpenWebif.epg_encoding))
 
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
