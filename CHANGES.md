@@ -1,3 +1,9 @@
+## Version 0.10.5
+* Fixed recordings top navigation
+* Fixed close icon issue on multiepg view
+* Styled current tv channel info
+* Fixed reboot icon
+
 ## Version 0.10.4
 * Fixed fullremote (issue [#4](https://github.com/MDXDave/ModernWebif/issues/4))
 * Fixed displaying missing collapse/expand icon (issue [#11](https://github.com/MDXDave/ModernWebif/issues/11))
