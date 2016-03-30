@@ -87,13 +87,13 @@ def getShowName():
 def getCustomName():
 	return {
 		"result": True,
-		"customname": config.ModernWebif.identifier.custom.value
+		"customname": config.ModernWebif.identifier_custom.value
 	}
 
 def getBoxName():
 	return {
 		"result": True,
-		"boxname": config.ModernWebif.identifier.text.value
+		"boxname": config.ModernWebif.identifier_text.value
 	}
 
 def getJsonFromConfig(cnf):

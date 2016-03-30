@@ -33,8 +33,8 @@ from __init__ import _
 config.ModernWebif = ConfigSubsection()
 config.ModernWebif.enabled = ConfigYesNo(default=True)
 config.ModernWebif.identifier = ConfigYesNo(default=True)
-config.ModernWebif.identifier.custom = ConfigYesNo(default=False)
-config.ModernWebif.identifier.text = ConfigText(default = "", fixed_size = False)
+config.ModernWebif.identifier_custom = ConfigYesNo(default=False)
+config.ModernWebif.identifier_text = ConfigText(default = "", fixed_size = False)
 config.ModernWebif.port = ConfigInteger(default = 80, limits=(1, 65535) )
 config.ModernWebif.streamport = ConfigInteger(default = 8001, limits=(1, 65535) )
 config.ModernWebif.auth = ConfigYesNo(default=False)
@@ -109,9 +109,9 @@ class ModernWebifConfig(Screen, ConfigListScreen):
 		if config.ModernWebif.enabled.value:
 			self.list.append(getConfigListEntry(_("Show box name in header"), config.ModernWebif.identifier))
 			if config.ModernWebif.identifier.value:
-				self.list.append(getConfigListEntry(_("Use custom box name"), config.ModernWebif.identifier.custom))
-				if config.ModernWebif.identifier.custom.value:
-					self.list.append(getConfigListEntry(_("Custom box name"), config.ModernWebif.identifier.text))
+				self.list.append(getConfigListEntry(_("Use custom box name"), config.ModernWebif.identifier_custom))
+				if config.ModernWebif.identifier_custom.value:
+					self.list.append(getConfigListEntry(_("Custom box name"), config.ModernWebif.identifier_text))
 			self.list.append(getConfigListEntry(_("HTTP port"), config.ModernWebif.port))
 			self.list.append(getConfigListEntry(_("Enable HTTP Authentication"), config.ModernWebif.auth))
 			self.list.append(getConfigListEntry(_("Enable HTTPS"), config.ModernWebif.https_enabled))
