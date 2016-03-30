@@ -302,6 +302,12 @@ input#amount {
   }
 }
 
+.close_icon {
+&:after {
+    content: "\f00d";
+  }
+}
+
 #leftmenu_top {
   height: 18px;
   margin: 2px;
