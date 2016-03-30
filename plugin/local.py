@@ -396,4 +396,6 @@ tstrings = {'mo': _("Mo"),
 	'bqe_filename': _("Please enter filename"),
 	'bqe_restore_question': _("Do you really want to restore from file"),
 
+	'subdirectories': _("Subdirectories"),
+
  	}

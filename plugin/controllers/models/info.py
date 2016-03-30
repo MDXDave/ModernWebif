@@ -42,7 +42,7 @@ import sys
 import time
 import string
 
-ModernWebifVER = "0.10.4"
+ModernWebifVER = "0.10.5"
 
 STATICBOXINFO = None
 
