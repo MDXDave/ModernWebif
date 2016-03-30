@@ -3,29 +3,30 @@
 <div id="content_main" style="min-height: 500px;">
 	<div id="tvcontentmain">
 		<div id="toolbar-header">
-			<span id="toolbar">
 		#set $path=''
-		<span id="moviebuttons">
-			<button onclick="load_maincontent_spin('ajax/movies?dirname=/'); return false">$tstrings['Root']</button>
+		<ul id="recordbuttons">
+			<li onclick="load_maincontent_spin('ajax/movies?dirname=/'); return false">$tstrings['Root']</li>
 			#for $dir in $directory[0:-1].split("/")[1:-1]
 				#set $path += '/' + $dir
-				<button onclick="load_maincontent_spin('ajax/movies?dirname='+escape('$path'));">$dir</button>
+				<li onclick="load_maincontent_spin('ajax/movies?dirname='+escape('$path'));">$dir</li>
 			#end for
 			#if $directory != '/'
-				<button><span style="color: red; font-weight: bold;">
-					#echo $directory[0:-1].split("/")[-1]
-				</span></button>
+				<li class="active">
+				    #echo $directory[0:-1].split("/")[-1]
+				</li>
 			#end if
-		</span>
-
-		#if $len($bookmarks)
-			<select name="directory" onChange="load_maincontent_spin('ajax/movies?dirname='+escape(options[selectedIndex].value)); return false;">
-			<option>Subdirs:</option>
+			#if $len($bookmarks)
+			<li class="lpd">
+			<select class="directories" name="directory" onChange="load_maincontent_spin('ajax/movies?dirname='+escape(options[selectedIndex].value)); return false;">
+			<option>$tstrings['Subdirectories']</option>
 			#for $bookmark in $bookmarks
 				<option value="$directory$bookmark">$bookmark</option>
 			#end for
 			</select>
+			</li>
 		#end if
+		</ul>
+
 		</span>
 		</div>
 
