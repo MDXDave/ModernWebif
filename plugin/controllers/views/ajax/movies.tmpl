@@ -18,7 +18,7 @@
 			#if $len($bookmarks)
 			<li class="lpd">
 			<select class="directories" name="directory" onChange="load_maincontent_spin('ajax/movies?dirname='+escape(options[selectedIndex].value)); return false;">
-			<option>$tstrings['Subdirectories']</option>
+			<option>Subdirectories</option>
 			#for $bookmark in $bookmarks
 				<option value="$directory$bookmark">$bookmark</option>
 			#end for
