@@ -302,6 +302,12 @@ input#amount {
   }
 }
 
+.close_icon {
+&:after {
+    content: "\f00d";
+  }
+}
+
 #leftmenu_top {
   height: 18px;
   margin: 2px;
@@ -386,7 +392,7 @@ input#amount {
   font-weight: bold;
 }
 
-ul#tvbutton, ul#screenshotbutton, ul#timerbuttons, #settingsbuttons {
+ul#tvbutton, ul#screenshotbutton, ul#timerbuttons, #settingsbuttons, ul#recordbuttons {
   display: table;
   table-layout: fixed;
   width: 100%;
@@ -401,6 +407,21 @@ ul#tvbutton, ul#screenshotbutton, ul#timerbuttons, #settingsbuttons {
     padding: 10px;
     transition: 0.3s all;
     &.active, &:hover {
+      background: #546E7A;
+    }
+    &.lpd {
+      padding: 0 10px;
+    }
+  }
+  select.directories {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    color: #fff;
+    outline: none;
+    cursor: pointer;
+    option {
       background: #546E7A;
     }
   }

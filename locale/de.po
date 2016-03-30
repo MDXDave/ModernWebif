@@ -1284,3 +1284,6 @@ msgstr "In neuem Fenster öffnen"
 
 msgid "Include description"
 msgstr "Beschreibung einbeziehen"
+
+msgid "Subdirectories"
+msgstr "Unterverzeichnisse"
